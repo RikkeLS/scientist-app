@@ -4,10 +4,10 @@ import Link from "next/link";
 
 console.clear();
 export default function PublicationsPage () {
-    console.log('papers.authors', papers);
+    // console.log('papers.authors', papers);
     return (
         <>
-        <h1>List of Publications</h1>
+        {/* <h1>List of Publications</h1>
         <ul>
         {papers?.map( paper => 
         (<li key={paper.id}>
@@ -34,9 +34,9 @@ export default function PublicationsPage () {
         </li>)
         )}
             
-        </ul>
+        </ul> */}
 
-        {/* <PapersList/> */}
+        <PapersList/>
         </>
     );
 };

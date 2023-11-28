@@ -4,11 +4,6 @@ import { useEffect, useState } from 'react';
 
 console.clear();
 export default function PapersList () {
-    // const [papers, setPapers] = useState([])
-
-    // const URL = 'http://export.arxiv.org/api/query?search_query=all:electron&start=0&max_results=10';
-    
-    
 
     //--- arXiv-api Wrapper:
     //parameters:
@@ -16,118 +11,62 @@ export default function PapersList () {
     const arxiv = require('arxiv-api');
     const authorName = 'saust';
 
-    let papersFetched = [];
-
-    // papersFetched = await arxiv.search({
-    // const papers = await arxiv.search({
-    //     searchQueryParams: [
-    //         {
-    //             include: [{name: authorName,prefix:prefix}]
-    //         },
-    //     ],
-    //     start: 0,
-    //     maxResults: 10,
-    //         });
-
-    // const getPapers = ()=> {
-        const [papers, setPapers] = useState([])
-
-        useEffect(()=> {
-            async function fetchData() {
-                try {
-                    const response = await arxiv.search({
-                        searchQueryParams: [
-                            {
-                                include: [{name: authorName,prefix:prefix}]
-                            },
-                        ],
-                        start: 0,
-                        maxResults: 10,
-                            });
-                    // console.log('papersFetched in async',papersFetched);
-                    console.log('response:',response);
-                    setPapers[response.data]
-                } catch (error) {
-                    console.log('error fetching',error);
-                }
-            }
-               
-    },[])
-    // }
-
-    console.log(papersFetched);
-    // async function getPapers() {
-    //     try {
-    //         papersFetched = await arxiv.search({
-    //             searchQueryParams: [
-    //                 {
-    //                     include: [{name: authorName,prefix:prefix}]
-    //                 },
-    //             ],
-    //             start: 0,
-    //             maxResults: 10,
-    //                 });
-    //         console.log('papersFetched in async',papersFetched);
-    //         setPapers[papersFetched]
-    //             // return papersFetched
-                
-    //             // if (papersFetched) {
-    //             //     setPapers[papersFetched]
-    //             // }
-                
-                
-    //     } catch (error) {
-    //         console.log('error fetching',error);
-    //     }
-    // };
-
-    // const fetchedPapers = getPapers() 
+ 
+    const [papers, setPapers] = useState(null)
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    useEffect(()=> {
+    async function fetchData() {
+        try {
+            const response = await arxiv.search({
+                searchQueryParams: [
+                    {
+                        include: [{name: authorName,prefix:prefix}]
+                    },
+                ],
+                start: 0,
+                maxResults: 10,
+                    });
+            setPapers(response)
+            setLoading(false)
+        } catch (error) {
+            setError(error)
+            console.log('error fetching',error);
+            setLoading(false)
+        }
+    }
+    fetchData();
+    },[]);
+    if (loading) {
+        console.log('was loading');
+        return <div>Loading...</div>;
+      }
+    if (error) {
+        console.log('error',error.message);
+    return <div>Error: {error.message}</div>;
+    }
     
 
-    // getPapers()
-    // useEffect(()=> {
-    //     console.log('papersFetched in useEffect',papersFetched,papers);
-    //     if ( papersFetched.length>0)
-    //     {
-    //         setPapers( papersFetched)
-    //     }
-    // },[papersFetched]);
-        
-
-    // useEffect(()=> {
-    //     const papersFetched = await getPapers()
-    //     setPapers(papersFetched)
-    // },[])
 
 
-
-    if (papers.length<1){
-        console.log('papers are not here');
-        return;
-    }
-    console.log('papers before return',papers);
+    if (!papers) return (<h1>data not available</h1>)
+    // console.log('papers before return',papers);
     return (
-        <>
-        <h1>List of Publications</h1>
+        <> 
+       <h1>List of Publications</h1>
         <ul>
-<li>list item</li>
-{papers?.map( paper => 
-(<li key={paper.id}>
- <h3>{paper.title}</h3>
-<p>Summary: {paper.summary}</p>
-</li>)
-)}
+        <li>list item</li>
+        {papers?.map( paper => 
+        (<li key={paper.id}>
+        <h3>{paper.title}</h3>
+        <p>Summary: {paper.summary}</p>
+        </li>)
+        )}
             
         </ul>
-
         </>
+
+        
     );
 };
 
-// {papers?.map( paper => 
-//     (<li key={paper.id}>
-//     <h3>{paper.title}</h3>
-//     {/* <p>papers.authors.map(author => author)</p> */}
-//     <p>Summary: {paper.summary}</p>
-//     </li>)
-//     )}
