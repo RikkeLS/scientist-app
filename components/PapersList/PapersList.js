@@ -1,5 +1,5 @@
 // import { papers } from "../../lib/mockPapers";
-
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 console.clear();
@@ -51,22 +51,40 @@ export default function PapersList () {
 
     if (!papers) return (<h1>data not available</h1>)
     // console.log('papers before return',papers);
+    console.log('paper object:',papers[8]);
     return (
         <> 
-       <h1>List of Publications</h1>
-        <ul>
-        <li>list item</li>
-        {papers?.map( paper => 
-        (<li key={paper.id}>
-        <h3>{paper.title}</h3>
-        <p>Summary: {paper.summary}</p>
-        </li>)
-        )}
-            
-        </ul>
+        <h1>List of Publications</h1>
+                <ul>
+                {papers?.map( paper => 
+                (<li key={paper.id}>
+                <h3>{paper.title}</h3>
+                <ul>
+                {paper.authors.map(author=> (<li key={author}>{author}</li>))}
+                </ul>
+                
+                <p>Summary: {paper.summary}</p>
+                <ul className="paper_links" >
+                {paper.links.map(link => (<li key={link.href}>
+                    <Link href={link.href}>{link.title ? link.title : link.type}</Link>
+                    </li>))}
+                </ul>
+                <p>Published: {paper.published}</p>
+                <p>Updated: {paper.updated}</p>
+                <ul className="paper_categories">
+                    <li>
+                    {paper.categories[0].scheme}
+                    </li>
+                    <li>
+                    {paper.categories[0].term}
+                    </li>
+                </ul>
+                </li>)
+                )}
+                    
+                </ul>
         </>
 
         
     );
 };
-
