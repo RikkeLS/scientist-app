@@ -1,103 +1,50 @@
-import useSWR from "swr";
-// let Parser = require('rss-parser');
-// let parser = new Parser();
+import { papers } from "../../lib/mockPapers";
+import PapersList from '../../components/PapersList/PapersList';
+import Link from "next/link";
 
+console.clear();
 export default function PublicationsPage () {
-    // const URL = "https://example-apis.vercel.app/api/art";// api which works
-    
-    const URL = 'http://export.arxiv.org/api/query?search_query=all:electron&start=0&max_results=10';
-    
-    
-    //---- Parser :
-    // (async () => {
-
-    //     let feed = await parser.parseURL(URL);
-    //     console.log(feed.title);
-      
-    //     feed.items.forEach(item => {
-    //       console.log(item.title + ':' + item.link)
-    //     });
-      
-    //   })();
-
-    //--- arXiv-api Wrapper:
-    //parameters:
-    const prefix = 'au'// for author: https://info.arxiv.org/help/api/user-manual.html#51-details-of-query-construction
-    const arxiv = require('arxiv-api');
-    const authorName = 'saust';
-
-    // (async () => {
-    // const papers = await arxiv.search({
-    //     searchQueryParams: [
-    //         {
-    //             include: [{name: authorName,prefix:prefix}]
-    //         },
-    //     ],
-    //     start: 0,
-    //     maxResults: 10,
-    //         });
-    //         console.log(papers);
-    //   })();
-    async function getPapers() {
-        const papers = await arxiv.search({
-            searchQueryParams: [
-                {
-                    include: [{name: authorName,prefix:prefix}]
-                },
-            ],
-            start: 0,
-            maxResults: 10,
-                });
-                console.log(papers);
-        return papers
-          };
-    const papers = getPapers()
-
-    if (!papers.result) return
-    if (papers.result) {
-        
-        console.log(papers.result);
-    }
-    // });
-	// 		include: [{name:'Saust'}, {name:'au'}]
-
-
-
-
-    
-
-
-        // async function fetchData() {
-        //     fetch(URL, {
-        //         method:"GET",
-        //         headers: {
-        //             'Content-Type': 'text/plain',
-        //         },
-        //         body: data
-        //     }
-        //     );
-        // } 
-        // fetchData()
-
-        // const {data, isLoading, error,isValidating} = useSWR(URL)
-        
-        // console.log('isValidating:',isValidating);
-        // if (isLoading) return <h1>loading data from arXiv</h1>
-        // if (error) return console.log('error',error);
-
-        // const dataText =  await data.getContentText()
-        // console.log(data);
-        // console.log(dataText);
-        
-
-    
+    console.log('papers.authors', papers);
     return (
         <>
         <h1>List of Publications</h1>
         <ul>
-            <li>List item</li>
+        {papers?.map( paper => 
+        (<li key={paper.id}>
+        <h3>{paper.title}</h3>
+        <ul>
+        {paper.authors.map(author=> (<li key={author}>{author}</li>))}
+        </ul>
+        
+        <p>Summary: {paper.summary}</p>
+        <ul className="paper_links" >
+        {paper.links.map(link => (<li key={link.href}>
+            <Link href={link.href}>{link.title ? link.title : link.type}</Link>
+            </li>))}
+        </ul>
+        <p>Published: {paper.published}</p>
+        <p>Updated: {paper.updated}</p>
+        <ul className="paper_categories">
+        {paper.categories.map(category =>(
+            <li key={category}>
+            {category}
+            </li>
+        )) }
+        </ul>
+        </li>)
+        )}
+            
         </ul>
 
+        {/* <PapersList/> */}
         </>
     );
 };
+
+// {papers?.map( paper => 
+//     (<li key={paper.id}>
+//     <h3>{paper.title}</h3>
+//     {/* <p>papers.authors.map(author => author)</p> */}
+//     <p>Summary: {paper.summary}</p>
+//     </li>)
+//     )}
