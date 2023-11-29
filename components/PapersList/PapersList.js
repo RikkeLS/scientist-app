@@ -1,6 +1,7 @@
 // import { papers } from "../../lib/mockPapers";
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import HideButton from '../HideButton/HideButton';
 
 console.clear();
 export default function PapersList ({authorToFetch,handleNewSearch}) {
@@ -13,7 +14,26 @@ export default function PapersList ({authorToFetch,handleNewSearch}) {
     const [papers, setPapers] = useState(null)
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    
+
+    ///----- hide paper toggling
+    const [isHiddenInfo,setIsHiddenInfo] = useState([])
+    function handleHidePaperToggle(paperID) {
+        // console.log('handle hide toggle for paperID',paperID);
+        const isPaperInfo = isHiddenInfo.find(info => info.paperID === paperID )
+        if (!isPaperInfo) {
+            setIsHiddenInfo([...isHiddenInfo,{paperID:paperID,isHidden:true}])
+        }
+        if (isPaperInfo) {
+            // console.log('toggle if paper is in info');
+            // console.log(isHiddenInfo);
+            const newState = isHiddenInfo.map(info => info.paperID!==paperID ?
+                 info :{...info,isHidden:!info.isHidden})
+            // console.log('newState',newState)
+            setIsHiddenInfo(newState)
+            
+        }
+        
+    }
 
     useEffect(()=> {
     async function fetchData() {
@@ -39,7 +59,6 @@ export default function PapersList ({authorToFetch,handleNewSearch}) {
     fetchData();
     },[]);
     if (loading) {
-        console.log('was loading');
         return <div>Loading...</div>;
       }
     if (error) {
@@ -51,6 +70,8 @@ export default function PapersList ({authorToFetch,handleNewSearch}) {
 
 
     if (!papers) return (<h1>data not available</h1>)
+
+
     // console.log('papers before return',papers);
     // console.log('paper object:',papers[8]);
     return (
@@ -59,12 +80,12 @@ export default function PapersList ({authorToFetch,handleNewSearch}) {
         <button onClick={()=> handleNewSearch()}>New search</button>
                 <ul>
                 {papers?.map( paper => 
-                (<li key={paper.id}>
+                (<li key={paper.id}> 
+                <HideButton isHiddenInfo={isHiddenInfo} paperID={paper.id} handleHidePaperToggle={handleHidePaperToggle}/>
                 <h3>{paper.title}</h3>
                 <ul>
                 {paper.authors.map(author=> (<li key={author}>{author}</li>))}
                 </ul>
-                
                 <p>Summary: {paper.summary}</p>
                 <ul className="paper_links" >
                 {paper.links.map(link => (<li key={link.href}>

@@ -14,6 +14,8 @@ export default function PublicationsPage () {
         setAuthorToFetch(null)
         router.push('/publications')
     }
+
+
     return (
         <>
         <PaperSearchQuery onSearch={handleSearchByAuthorSubmit}/>
