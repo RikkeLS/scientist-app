@@ -18,23 +18,18 @@ export default function PapersList ({authorToFetch,handleNewSearch}) {
     ///----- hide paper toggling
     const [isHiddenInfo,setIsHiddenInfo] = useState([])
     function handleHidePaperToggle(paperID) {
-        // console.log('handle hide toggle for paperID',paperID);
-        const isPaperInfo = isHiddenInfo.find(info => info.paperID === paperID )
-        if (!isPaperInfo) {
+        const paperInfo = isHiddenInfo.find(info => info.paperID === paperID )
+        if (!paperInfo) {
             setIsHiddenInfo([...isHiddenInfo,{paperID:paperID,isHidden:true}])
         }
-        if (isPaperInfo) {
-            // console.log('toggle if paper is in info');
-            // console.log(isHiddenInfo);
+        if (paperInfo) {
             const newState = isHiddenInfo.map(info => info.paperID!==paperID ?
                  info :{...info,isHidden:!info.isHidden})
-            // console.log('newState',newState)
             setIsHiddenInfo(newState)
             
         }
         
     }
-
     useEffect(()=> {
     async function fetchData() {
         try {
