@@ -3,14 +3,14 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 console.clear();
-export default function PapersList () {
+export default function PapersList ({fetchByAuthor}) {
 
     //--- arXiv-api Wrapper:
     //parameters:
     const prefix = 'au'// for author: https://info.arxiv.org/help/api/user-manual.html#51-details-of-query-construction
     const arxiv = require('arxiv-api');
-    const authorName = 'saust';
-
+    const authorName = 'saust';// fetchByAuthor;
+    console.log('fetchedauthor',fetchByAuthor);
  
     const [papers, setPapers] = useState(null)
     const [loading, setLoading] = useState(true);
