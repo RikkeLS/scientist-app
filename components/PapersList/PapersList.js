@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import HideButton from '../HideButton/HideButton';
 
 console.clear();
-export default function PapersList ({authorToFetch,handleNewSearch}) {
+export default function PapersList ({authorToFetch,handleNewSearch,addPapers}) {
     //--- arXiv-api Wrapper:
     //parameters:
     const prefix = 'au'// for author: https://info.arxiv.org/help/api/user-manual.html#51-details-of-query-construction
@@ -66,13 +66,11 @@ export default function PapersList ({authorToFetch,handleNewSearch}) {
 
     if (!papers) return (<h1>data not available</h1>)
 
-
-    // console.log('papers before return',papers);
-    // console.log('paper object:',papers[8]);
     return (
         <> 
-        <h1>List of Publications</h1>
+        <h1>List of papers</h1>
         <button onClick={()=> handleNewSearch()}>New search</button>
+        <button onClick={()=> addPapers(papers)}>Save to database</button>
                 <ul>
                 {papers?.map( paper => 
                 (<li key={paper.id}> 
