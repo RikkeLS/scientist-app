@@ -14,6 +14,13 @@ export default function Home() {
         <Link href={'/login'}>Link to login page</Link>
         </li>
       </ul>
+      <h2>Registrered user profiles:</h2>
+      <ul>
+        <li>
+        <Link href={'/RikkeLS/create-profile'}>Link to RikkeLS</Link>
+        </li>
+      </ul>
+
       </nav>
     </>
   );
