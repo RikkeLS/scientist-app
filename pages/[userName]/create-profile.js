@@ -2,7 +2,7 @@ import CreateProfileForm from "../../components/CreateProfileForm/CreateProfileF
 export default function createProfilePage () {
     return (
         <>
-        <h1> create your profile here:</h1>
+        <h1> Create your profile here:</h1>
         <CreateProfileForm/>
         </>
     )
