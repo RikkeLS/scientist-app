@@ -16,27 +16,27 @@ export default function papersPage () {
     }
 
     // let isSaved = false
+    const [isPaperSaved, setIsPaperSaved] = useState(false);
     async function addPapers(papers) {
    
-        const paper = {id:papers[0].id,title:papers[0].title}
-        console.log('paper to post',paper);
+        // const paper = {id:papers[0].id,title:papers[0].title}
+        // console.log('paper to post',paper);
         const response = await fetch('api/papers', {
             method:'POST',
             headers: {
                 'Content-Type':'application/json',
             },
-            body:JSON.stringify(paper)
+            body:JSON.stringify(papers)
         })
         if (response.ok) {
-            // isSaved = true
-            console.log('send to backend');
-            // router.push('/papers')
+            setIsPaperSaved(true)
+            router.push('/papers')
         }
     }
 
     return (
         <>
-        {/* {isSaved ? <div> saved </div>: <div>not saved</div>} */}
+        {isPaperSaved ? <div> saved to db </div>: <div>not saved</div>}
         <PaperSearchQuery onSearch={handleSearchByAuthorSubmit}/>
         {!authorToFetch ?<div>Search to find your papers!</div> :
         <PapersList authorToFetch={authorToFetch} handleNewSearch={handleNewSearch} addPapers={addPapers} />}
