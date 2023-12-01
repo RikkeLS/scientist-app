@@ -6,7 +6,7 @@ export default function MainProfilePage() {
     const {data:session} = useSession();
     const router = useRouter()
     const currentPageOwner = router.query.userName
-    if (session?.user.name.toLowerCase()===currentPageOwner){
+    if (session?.user.name===currentPageOwner){
         return (
             <>
                 <h1> Your main profile page </h1>
@@ -15,7 +15,7 @@ export default function MainProfilePage() {
             </>
         )
     }
-    if (session?.user.name.toLowerCase()!==currentPageOwner) {
+    if (session?.user.name!==currentPageOwner) {
         return (
             <>  
                  <h1>Main profile page for {currentPageOwner}</h1>

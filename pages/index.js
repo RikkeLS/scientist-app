@@ -11,13 +11,17 @@ export default function Home() {
         <Link href={'/papers'}>Link to Publications/papers</Link>
         </li>
         <li>
+        <Link href={'/create-profile'}>Link to create profile</Link>
+        
+        </li>
+        <li>
         <Link href={'/login'}>Link to login page</Link>
         </li>
       </ul>
-      <h2>Registrered user profiles:</h2>
+      <h2>Registered user profiles:</h2>
       <ul>
         <li>
-        <Link href={'/RikkeLS/create-profile'}>Link to RikkeLS</Link>
+        <Link href={'/RikkeLS'}>Link to RikkeLS</Link>
         </li>
       </ul>
 
