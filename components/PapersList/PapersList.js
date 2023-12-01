@@ -1,7 +1,6 @@
 // import { papers } from "../../lib/mockPapers";
-import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import HideButton from '../HideButton/HideButton';
+import Paper from '../Paper/Paper';
 
 console.clear();
 export default function PapersList ({authorToFetch,handleNewSearch,addPapers}) {
@@ -15,21 +14,31 @@ export default function PapersList ({authorToFetch,handleNewSearch,addPapers}) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    ///----- hide paper toggling
-    const [isHiddenInfo,setIsHiddenInfo] = useState([])
-    function handleHidePaperToggle(paperID) {
-        const paperInfo = isHiddenInfo.find(info => info.paperID === paperID )
+    ///----- select paper toggling
+    const [isSelectedInfo,setIsSelectedInfo] = useState([])
+    function handleSelectPaperToggle(paperID) {
+        const paperInfo = isSelectedInfo.find(info => info.paperID === paperID )
         if (!paperInfo) {
-            setIsHiddenInfo([...isHiddenInfo,{paperID:paperID,isHidden:true}])
+            setIsSelectedInfo([...isSelectedInfo,{paperID:paperID,isSelected:true}])
         }
         if (paperInfo) {
-            const newState = isHiddenInfo.map(info => info.paperID!==paperID ?
-                 info :{...info,isHidden:!info.isHidden})
-            setIsHiddenInfo(newState)
+            const newState = isSelectedInfo.map(info => info.paperID!==paperID ?
+                 info :{...info,isSelected:!info.isSelected})
+            setIsSelectedInfo(newState)
             
-        }
-        
+        } 
     }
+    function handleSelectAllPapers() {
+        setIsSelectedInfo(
+            papers.map(paper => ({paperID:paper.id,isSelected:true}))
+        )
+    }
+    function handleDeSelectAllPapers() {
+        setIsSelectedInfo(
+            papers.map(paper => ({paperID:paper.id,isSelected:false}))
+        )
+    }
+
     useEffect(()=> {
     async function fetchData() {
         try {
@@ -62,40 +71,17 @@ export default function PapersList ({authorToFetch,handleNewSearch,addPapers}) {
     }
     
 
-
-
     if (!papers) return (<h1>data not available</h1>)
 
     return (
         <> 
         <h1>List of papers</h1>
         <button onClick={()=> handleNewSearch()}>New search</button>
+        <button onClick={()=>handleSelectAllPapers()}>Select all papers</button>
+        <button onClick={()=>handleDeSelectAllPapers()}>Deselect all papers</button>
         <button onClick={()=> addPapers(papers)}>Save to database</button>
                 <ul>
-                {papers?.map( paper => 
-                (<li key={paper.id}> 
-                <HideButton isHiddenInfo={isHiddenInfo} paperID={paper.id} handleHidePaperToggle={handleHidePaperToggle}/>
-                <h3>{paper.title}</h3>
-                <ul>
-                {paper.authors.map(author=> (<li key={author}>{author}</li>))}
-                </ul>
-                <p>Summary: {paper.summary}</p>
-                <ul className="paper_links" >
-                {paper.links.map(link => (<li key={link.href}>
-                    <Link href={link.href}>{link.title ? link.title : link.type}</Link>
-                    </li>))}
-                </ul>
-                <p>Published: {paper.published}</p>
-                <p>Updated: {paper.updated}</p>
-                <ul className="paper_categories">
-                    <li>
-                    {paper.categories[0].scheme}
-                    </li>
-                    <li>
-                    {paper.categories[0].term}
-                    </li>
-                </ul>
-                </li>)
+                {papers?.map( paper => <Paper key={paper.id} paper={paper} handleSelectPaperToggle={handleSelectPaperToggle} isSelectedInfo={isSelectedInfo} />
                 )}
                     
                 </ul>
