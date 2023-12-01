@@ -21,8 +21,8 @@ export default function CreateProfileForm({onCreateNewUser}) {
     return (
         <>
         <form onSubmit={handleSubmit}>
-            <label htmlFor='FullName'>Full name displayed on site:</label>
-            <input id='FullName' name={'FullName'} />
+            <label htmlFor='fullName'>Full name displayed on site:</label>
+            <input id='fullName' name={'fullName'} />
             <label htmlFor='isProviderPic'> You want to use your Github profile picture?</label>
             <input type='checkbox' defaultChecked id='isProviderPic' name='isProviderPic' />
             <Image 

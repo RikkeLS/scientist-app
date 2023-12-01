@@ -3,6 +3,7 @@ import { useSession } from "next-auth/react";
 import LoginButton from "../LoginButton/LoginButton";
 import { useState } from "react";
 import ShowCreatedProfileInfo from "../ShowCreatedProfileInfo/ShowCreatedProfileInfo";
+import Papers from '../Papers/Papers';
 
 export default function CreateProfile () {
 
@@ -19,7 +20,7 @@ export default function CreateProfile () {
     }
     
     function handleCreateNewUser(userInfo) {
-        console.log('new user info:',userInfo);
+        // console.log('new user info:',userInfo);
         setNewUserInfo(userInfo)
     }
 
@@ -28,7 +29,11 @@ export default function CreateProfile () {
         <>
         <h1> Create a profile with username {userName} (Github username):</h1>
         <CreateProfileForm onCreateNewUser={handleCreateNewUser} />
-        {newUserInfo ? <ShowCreatedProfileInfo newUserInfo={newUserInfo} /> :'' }
+        {newUserInfo ? (<>
+            <ShowCreatedProfileInfo newUserInfo={newUserInfo}/> 
+            <Papers authorName={newUserInfo.fullName}/>
+            </>)
+        :'' }
 
         <LoginButton/>
         </>
