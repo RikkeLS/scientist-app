@@ -1,13 +1,15 @@
 import CreateProfileForm from "../components/CreateProfileForm/CreateProfileForm"
 import { useSession } from "next-auth/react";
 import LoginButton from "../components/LoginButton/LoginButton";
+import { useState } from "react";
+import ShowCreatedProfileInfo from "../components/ShowCreatedProfileInfo/ShowCreatedProfileInfo";
 
 export default function createProfilePage () {
 
     const { data: session } = useSession();
     const userName = session?.user?.name;
+    const [newUserInfo, setNewUserInfo] = useState()
 
-    console.log('session',session);
     if (!session) {
         return (
             <>
@@ -15,11 +17,19 @@ export default function createProfilePage () {
             <LoginButton/>
             </>)
     }
+    
+    function handleCreateNewUser(userInfo) {
+        console.log('new user info:',userInfo);
+        setNewUserInfo(userInfo)
+    }
+
 
     return (
         <>
         <h1> Create a profile with username {userName} (Github username):</h1>
-        <CreateProfileForm/>
+        <CreateProfileForm onCreateNewUser={handleCreateNewUser} />
+        {newUserInfo ? <ShowCreatedProfileInfo newUserInfo={newUserInfo} /> :'' }
+
         <LoginButton/>
         </>
     )
