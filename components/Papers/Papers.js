@@ -2,9 +2,12 @@ import PapersList from '../PapersList/PapersList';
 import PaperSearchQuery from '../PaperSearchQuery/PaperSearchQuery';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/react';
 
 // console.clear();
 export default function Papers ({authorName}) {
+    const {data:session} = useSession();
+
     let initialAuthor = null;
     if (authorName) {
       initialAuthor = {author:authorName}
@@ -16,7 +19,7 @@ export default function Papers ({authorName}) {
     }
     function handleNewSearch() {
         setAuthorToFetch(null)
-        router.push('/papers')
+        router.push('/create-profile')
     }
     console.log('authorToFetch',authorToFetch);
     console.log('authorToFetch',authorName);
@@ -25,15 +28,7 @@ export default function Papers ({authorName}) {
     const [isPaperSaved, setIsPaperSaved] = useState(false);
     async function addPapers(papers) {
    
-        // const paper = {id:papers[0].id,title:papers[0].title}
-        // console.log('paper to post',paper);
-        // const response = await fetch('api/papers', {
-        //     method:'POST',
-        //     headers: {
-        //         'Content-Type':'application/json',
-        //     },
-        //     body:JSON.stringify(papers)
-        // })
+
             const response = await fetch('api/create-profile', {
             method:'POST',
             headers: {
@@ -43,7 +38,7 @@ export default function Papers ({authorName}) {
         })
         if (response.ok) {
             setIsPaperSaved(true)
-            // router.push('/papers')
+            router.push(`/${session.user.name}`)
         }
     }
 
