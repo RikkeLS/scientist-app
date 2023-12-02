@@ -3,8 +3,7 @@ import mongoose,{ Schema } from "mongoose";
 const userSchema = new Schema ({
     userName:{type:String,required:true},
     fullName:{type:String},
-    profileImageURL:{type:String},
-    // createdAt:{ type: Date, default: Date.now },   
+    profileImageURL:{type:String},  
 }, {
     timestamps:true,
 });

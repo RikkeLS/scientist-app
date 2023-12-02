@@ -41,13 +41,13 @@ export default function CreateProfile () {
     return (
         <>
         <h1> Create a profile with username {userName} (Github username):</h1>
-        <CreateProfileForm onCreateNewUser={handleCreateNewUser} />
-        {newUserInfo ? (<>
+        
+        {!newUserInfo ? (
+            <CreateProfileForm onCreateNewUser={handleCreateNewUser} />)
+        : <>
             <ShowCreatedProfileInfo newUserInfo={newUserInfo}/> 
             <Papers authorName={newUserInfo.fullName}/>
-            </>)
-        :'' }
-
+          </>}
         <LoginButton/>
         </>
     )
