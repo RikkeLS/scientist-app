@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import Paper from '../Paper/Paper';
 
 console.clear();
-export default function PapersList ({authorToFetch,handleNewSearch,addPapers}) {
+export default function PapersList ({authorToFetch,handleNewSearch,addSelectedPapers}) {
     //--- arXiv-api Wrapper:
     //parameters:
     const prefix = 'au'// for author: https://info.arxiv.org/help/api/user-manual.html#51-details-of-query-construction
@@ -69,7 +69,6 @@ export default function PapersList ({authorToFetch,handleNewSearch,addPapers}) {
         console.log('error',error.message);
     return <div>Error: {error.message}</div>;
     }
-    
 
     if (!papers) return (<h1>data not available</h1>)
 
@@ -79,9 +78,10 @@ export default function PapersList ({authorToFetch,handleNewSearch,addPapers}) {
         <button onClick={()=> handleNewSearch()}>New search</button>
         <button onClick={()=>handleSelectAllPapers()}>Select all papers</button>
         <button onClick={()=>handleDeSelectAllPapers()}>Deselect all papers</button>
-        <button onClick={()=> addPapers(papers)}>Save to database</button>
+        <button onClick={()=> addSelectedPapers(papers,isSelectedInfo)}>Save to database</button>
                 <ul>
-                {papers?.map( paper => <Paper key={paper.id} paper={paper} handleSelectPaperToggle={handleSelectPaperToggle} isSelectedInfo={isSelectedInfo} />
+                {papers?.map( paper =>
+                    <Paper key={paper.id} paper={paper} handleSelectPaperToggle={handleSelectPaperToggle} isSelectedInfo={isSelectedInfo} />
                 )}
                     
                 </ul>

@@ -20,21 +20,34 @@ export default function CreateProfile () {
     }
     
     function handleCreateNewUser(userInfo) {
-        // console.log('new user info:',userInfo);
         setNewUserInfo(userInfo)
+        userInfo['userName']=session.user.name
+        addNewUser()
+        async function addNewUser() {
+            const response = await fetch('api/create-profile-user', {
+                method:'POST',
+                headers: {
+                    'Content-Type':'application/json',
+                },
+                body:JSON.stringify(userInfo)
+            })
+            if (response.ok) {
+            }
+        }
     }
+
 
 
     return (
         <>
         <h1> Create a profile with username {userName} (Github username):</h1>
-        <CreateProfileForm onCreateNewUser={handleCreateNewUser} />
-        {newUserInfo ? (<>
+        
+        {!newUserInfo ? (
+            <CreateProfileForm onCreateNewUser={handleCreateNewUser} />)
+        : <>
             <ShowCreatedProfileInfo newUserInfo={newUserInfo}/> 
             <Papers authorName={newUserInfo.fullName}/>
-            </>)
-        :'' }
-
+          </>}
         <LoginButton/>
         </>
     )
