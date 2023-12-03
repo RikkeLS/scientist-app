@@ -15,6 +15,8 @@ export default function CreateProfileForm({onCreateNewUser}) {
         } else {
             data.isProviderPic=true
         }
+        //add providerPic:
+        data['profileImageURL'] = session.user.image
         onCreateNewUser(data)
     }
 

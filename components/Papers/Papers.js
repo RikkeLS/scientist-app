@@ -30,7 +30,6 @@ export default function Papers ({authorName}) {
             return selectedPaperIds.includes(paper.id)
         })
         //-- change structure of authors:
-        console.log('selectedPapers',selectedPapers[0].authors);
         const selectedPapersForDB = selectedPapers.map(paper =>
            ({...paper,authors:paper['authors'].flat(1)})
         )
@@ -43,7 +42,7 @@ export default function Papers ({authorName}) {
         })
         if (response.ok) {
             setIsPaperSaved(true)
-            // router.push(`/${session.user.name}`)
+            router.push(`/${session.user.name}`)
         }
     }
 

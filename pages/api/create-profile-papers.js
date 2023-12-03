@@ -15,7 +15,7 @@ export default async function handler(request, response) {
             // }
             // 
             //--get userID from username: 
-            const userIDs = await User.find({'userName': { $eq: userName }},{_id:1})//,{_id:1}) //({'userName': { $eq: userName }})//,{_id:1})
+            const userIDs = await User.find({'userName': { $eq: userName }},{_id:1})//
             //--need to only have one, now code is not setup to not allow more than one user:
             const userID = userIDs[userIDs.length-1]
             //-- add userID to all papers:
