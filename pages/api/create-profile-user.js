@@ -1,6 +1,5 @@
 import User from '../../db/models/User'
 import dbConnect from '../../db/dbConnect';
-import { log } from 'console';
 
 export default async function handler(request, response) {
     await dbConnect();

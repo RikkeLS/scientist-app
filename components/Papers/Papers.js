@@ -10,7 +10,9 @@ export default function Papers ({authorName}) {
 
     let initialAuthor = null;
     if (authorName) {
-      initialAuthor = {author:authorName}
+        const allNames = authorName.split(' ')
+        const lastName = allNames[allNames?.length-1]
+        initialAuthor = {author:lastName}
     }
     const router = useRouter()
     const [authorToFetch,setAuthorToFetch] = useState(initialAuthor)
@@ -30,7 +32,6 @@ export default function Papers ({authorName}) {
             return selectedPaperIds.includes(paper.id)
         })
         //-- change structure of authors:
-        console.log('selectedPapers',selectedPapers[0].authors);
         const selectedPapersForDB = selectedPapers.map(paper =>
            ({...paper,authors:paper['authors'].flat(1)})
         )
@@ -43,7 +44,7 @@ export default function Papers ({authorName}) {
         })
         if (response.ok) {
             setIsPaperSaved(true)
-            // router.push(`/${session.user.name}`)
+            router.push(`/${session.user.name}`)
         }
     }
 
@@ -51,7 +52,7 @@ export default function Papers ({authorName}) {
         <>
         {isPaperSaved ? <div> saved to db </div>: <div>not saved</div>}
         {!authorToFetch && <PaperSearchQuery onSearch={handleSearchByAuthorSubmit}/>} 
-        {!authorToFetch ?<div>Search to find your papers!</div> :
+        {!authorToFetch ?<p>Search to find your papers!</p> :
         <PapersList authorToFetch={authorToFetch} handleNewSearch={handleNewSearch} addSelectedPapers={addSelectedPapers} />}
         </>
     );

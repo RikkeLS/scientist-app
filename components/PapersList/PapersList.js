@@ -75,6 +75,7 @@ export default function PapersList ({authorToFetch,handleNewSearch,addSelectedPa
     return (
         <> 
         <h1>List of papers</h1>
+        <p>Searched by author: {authorName}</p>
         <button onClick={()=> handleNewSearch()}>New search</button>
         <button onClick={()=>handleSelectAllPapers()}>Select all papers</button>
         <button onClick={()=>handleDeSelectAllPapers()}>Deselect all papers</button>

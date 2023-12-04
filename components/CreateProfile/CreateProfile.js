@@ -35,7 +35,10 @@ export default function CreateProfile () {
             }
         }
     }
-
+    if (newUserInfo) {
+        const allNames = newUserInfo?.fullName.split(' ')
+        const lastName = allNames[allNames?.length-1]
+    }
 
 
     return (
@@ -46,7 +49,7 @@ export default function CreateProfile () {
             <CreateProfileForm onCreateNewUser={handleCreateNewUser} />)
         : <>
             <ShowCreatedProfileInfo newUserInfo={newUserInfo}/> 
-            <Papers authorName={newUserInfo.fullName}/>
+            <Papers authorName={newUserInfo?.fullName}/>
           </>}
         <LoginButton/>
         </>
