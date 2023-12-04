@@ -76,8 +76,7 @@ export default function PapersList ({authorToFetch,handleNewSearch,addSelectedPa
 
     return (
         <> 
-        <h1>List of papers</h1>
-        <p>Searched by author: {authorName}</p>
+        <h3>Papers on archive from search <em>author: {authorName}</em> </h3>
         <ul className='papersSelectionButtonList'>
         <li>
         <button className='NewSearchButton' onClick={()=> handleNewSearch()}>New search</button>

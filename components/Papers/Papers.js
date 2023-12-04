@@ -61,7 +61,6 @@ export default function Papers ({authorName}) {
 
     return (
         <>
-        {isPaperSaved ? <div> saved to db </div>: <div>not saved</div>}
         {!authorToFetch && <PaperSearchQuery onSearch={handleSearchByAuthorSubmit}/>} 
         {!authorToFetch ?<p>Search to find your papers!</p> :
         <PapersList authorToFetch={authorToFetch} handleNewSearch={handleNewSearch} addSelectedPapers={addSelectedPapers} isPaperSaved={isPaperSaved}/>}
