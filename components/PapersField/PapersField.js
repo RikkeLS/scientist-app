@@ -21,7 +21,7 @@ export default  function PapersField ({userName,getPapers}) {
 
     return (
     <>
-        <h2 className="papersFieldTitle" >Papers</h2>
+        <h2 className="papersFieldTitle" >Papers on arXiv:</h2>
      <ul className='paperOverviewList'>
         {
             papers.map(paper => 

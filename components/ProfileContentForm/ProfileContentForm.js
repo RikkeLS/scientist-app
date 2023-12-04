@@ -1,9 +1,7 @@
 import { useState } from "react";
-import useSWR from "swr";
 
-export default function ProfileContentForm ({userName,papers,handleAddProfileContent}) {
+export default function ProfileContentForm ({papers,handleAddProfileContent}) {
     const [selectedTemplate,setSelectedTemplate] = useState()
-    const [suggestedValue,setSuggestedValue] = useState()
 
     function handleSelectTemplate(event) {
         setSelectedTemplate(event.target.value)
@@ -11,12 +9,13 @@ export default function ProfileContentForm ({userName,papers,handleAddProfileCon
     
     function handleSubmit (event) {
         event.preventDefault()
-
+        const formData = new FormData(event.target);
+        const data = Object.fromEntries(formData)
+        handleAddProfileContent(data)
     }
 
     let topCoAuthors;
     if (selectedTemplate==='collaborators') {
-        console.log('get top 5 co-authors');
         const authors = papers.map(paper => paper.authors )
         const allAuthors = authors.flat(1);
         //counting occurences:
@@ -51,7 +50,7 @@ export default function ProfileContentForm ({userName,papers,handleAddProfileCon
         <form onSubmit={handleSubmit} id='ProfileContentForm'>
 
         <label htmlFor="fieldTitle" >Field title:</label>
-        {selectedTemplate ? <input defaultValue={selectedTemplate} type='text' name="fieldTitle" id="fieldTitle"></input> :
+        {selectedTemplate ? <input defaultValue={selectedTemplate.toUpperCase()} type='text' name="fieldTitle" id="fieldTitle"></input> :
         <input defaultValue='' type='text' name="fieldTitle" id="fieldTitle"></input> }
         
         {selectedTemplate==='collaborators' ? <>

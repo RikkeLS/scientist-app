@@ -5,7 +5,8 @@ import PapersField from "../../components/PapersField/PapersField";
 import UserNavBar from "../../components/UserNavBar/UserNavBar";
 import Link from "next/link";
 import ProfileContentForm from "../../components/ProfileContentForm/ProfileContentForm";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import ShowEntryData from "../../components/ShowEntryData/ShowEntryData";
 
 export default function MainProfilePage() {
     const [papers,setPapers] = useState()
@@ -13,8 +14,13 @@ export default function MainProfilePage() {
     const router = useRouter()
     const currentPageOwner = router.query.userName
     
+    const [entry, setEntry] = useState()
 
 
+    function handleAddProfileContent(entryData) {
+        console.log('entryData',entryData);
+        setEntry(entryData)
+    }
 
 
     function getPapers(papersFromComponent) {
@@ -27,9 +33,10 @@ export default function MainProfilePage() {
         }
             <UserNavBar userName={currentPageOwner}/>
             {session?.user.name===currentPageOwner &&
-            <ProfileContentForm userName={currentPageOwner} papers={papers}/> }
-
+            <ProfileContentForm handleAddProfileContent={handleAddProfileContent} papers={papers}/> }
+            {entry ? <ShowEntryData entry={entry}/>:''}
             <PapersField getPapers={getPapers} userName={currentPageOwner}/>
+
             <LoginButton/>
             <Link href={'/'}>Go to homepage</Link>
         </>
