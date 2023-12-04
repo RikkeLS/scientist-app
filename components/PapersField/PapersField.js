@@ -2,7 +2,7 @@ import useSWR from "swr";
 import Link from "next/link";
 
 
-export default  function PapersField ({userName}) {
+export default  function PapersField ({userName,getPapers}) {
     const { data:papers, isLoading, error } = useSWR(`/api/${userName}/papers`)
 
     if (isLoading) return (
@@ -17,6 +17,8 @@ export default  function PapersField ({userName}) {
         <h4>Error! {error.message}</h4>
         </> 
     )
+    getPapers(papers)
+
     return (
     <>
         <h2 className="papersFieldTitle" >Papers</h2>
