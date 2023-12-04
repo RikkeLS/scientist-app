@@ -1,9 +1,11 @@
 // import { papers } from "../../lib/mockPapers";
 import { useEffect, useState } from 'react';
 import Paper from '../Paper/Paper';
+import SaveButton from '../SaveButton/SaveButton';
+import SelectAllButton from '../SelectAllButton/SelectAllButton';
 
 console.clear();
-export default function PapersList ({authorToFetch,handleNewSearch,addSelectedPapers}) {
+export default function PapersList ({authorToFetch,handleNewSearch,addSelectedPapers,isPaperSaved}) {
     //--- arXiv-api Wrapper:
     //parameters:
     const prefix = 'au'// for author: https://info.arxiv.org/help/api/user-manual.html#51-details-of-query-construction
@@ -76,11 +78,21 @@ export default function PapersList ({authorToFetch,handleNewSearch,addSelectedPa
         <> 
         <h1>List of papers</h1>
         <p>Searched by author: {authorName}</p>
-        <button onClick={()=> handleNewSearch()}>New search</button>
-        <button onClick={()=>handleSelectAllPapers()}>Select all papers</button>
-        <button onClick={()=>handleDeSelectAllPapers()}>Deselect all papers</button>
-        <button onClick={()=> addSelectedPapers(papers,isSelectedInfo)}>Save to database</button>
-                <ul>
+        <ul className='papersSelectionButtonList'>
+        <li>
+        <button className='NewSearchButton' onClick={()=> handleNewSearch()}>New search</button>
+        </li><li>
+        <SelectAllButton action='select' onClick={()=>handleSelectAllPapers()}>Select all papers</SelectAllButton>
+        </li><li>
+        <SelectAllButton action='deselect' onClick={()=>handleDeSelectAllPapers()}>Deselect all papers</SelectAllButton>
+        </li><li>
+        <SaveButton onSave={()=>addSelectedPapers(papers,isSelectedInfo)} isSaved={isPaperSaved}/>
+        </li>
+        </ul>
+ 
+        
+        {/* <button onClick={()=> addSelectedPapers(papers,isSelectedInfo)}>Save to database</button> */}
+                <ul className='papersList'>
                 {papers?.map( paper =>
                     <Paper key={paper.id} paper={paper} handleSelectPaperToggle={handleSelectPaperToggle} isSelectedInfo={isSelectedInfo} />
                 )}

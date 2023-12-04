@@ -1,4 +1,5 @@
-import GlobalStyle from "../styles.js";
+// import GlobalStyle from "../styles.js";
+import '../styles.css'
 import { SWRConfig } from "swr";
 import { SessionProvider } from 'next-auth/react';
 // import Layout from "../components/Layout.js";
@@ -20,7 +21,7 @@ export default function App({
         },
       }}
     >
-        <GlobalStyle />
+        {/* <GlobalStyle /> */}
         <Component {...pageProps} />
     </SWRConfig>
     </SessionProvider>

@@ -1,0 +1,41 @@
+@import './components/PapersList/PapersList.css';
+@import './components/SaveButton/SaveButton.css';
+@import './components/SelectAllButton/SelectAllButton.css';
+@import './components/SelectButton/SelectButton.css';
+
+:root {
+    --color-std-text: black;
+    --color-std-background: white;
+}
+
+*,
+*::before,
+*::after {
+box-sizing: border-box;
+}
+
+body {
+margin: 0;
+font-family: system-ui;
+}
+
+button {
+    text-transform: capitalize;
+    background-color: lightgrey;
+    border: 1px solid gray;
+    padding:5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 10px;
+    margin: 5px;
+}
+a {
+    /* border-bottom:2px solid gray; */
+}
+
+ul {
+    list-style: none;
+}
+li {
+    margin: 5px;
+}
