@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import LoginButton from "../../components/LoginButton/LoginButton";
 import PapersField from "../../components/PapersField/PapersField";
 import UserNavBar from "../../components/UserNavBar/UserNavBar";
+import Link from "next/link";
 
 export default function MainProfilePage() {
     const {data:session} = useSession();
@@ -16,6 +17,7 @@ export default function MainProfilePage() {
             <UserNavBar userName={currentPageOwner}/>
             <PapersField userName={currentPageOwner}/>
             <LoginButton/>
+            <Link href={'/'}>go to homepage</Link>
         </>
     )
     

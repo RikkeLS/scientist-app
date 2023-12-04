@@ -24,8 +24,9 @@ export default function Papers ({authorName}) {
         router.push('/create-profile')
     }
 
-    // let isSaved = false
+
     const [isPaperSaved, setIsPaperSaved] = useState(false);
+
     async function addSelectedPapers(papers,isSelectedInfo) {
         const selectedPaperIds = isSelectedInfo.map(info => info.isSelected && info.paperID )
         let selectedPapers = papers.filter(paper => {
@@ -44,7 +45,17 @@ export default function Papers ({authorName}) {
         })
         if (response.ok) {
             setIsPaperSaved(true)
-            router.push(`/${session.user.name}`)
+
+            let timeout;
+            function MyTimeOut() {
+                timeout = setTimeout(changeRoute,2000)
+            }
+
+            function changeRoute() {
+                router.push(`/${session.user.name}`)
+            }
+            MyTimeOut()
+            
         }
     }
 
@@ -53,7 +64,7 @@ export default function Papers ({authorName}) {
         {isPaperSaved ? <div> saved to db </div>: <div>not saved</div>}
         {!authorToFetch && <PaperSearchQuery onSearch={handleSearchByAuthorSubmit}/>} 
         {!authorToFetch ?<p>Search to find your papers!</p> :
-        <PapersList authorToFetch={authorToFetch} handleNewSearch={handleNewSearch} addSelectedPapers={addSelectedPapers} />}
+        <PapersList authorToFetch={authorToFetch} handleNewSearch={handleNewSearch} addSelectedPapers={addSelectedPapers} isPaperSaved={isPaperSaved}/>}
         </>
     );
 };

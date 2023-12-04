@@ -1,0 +1,15 @@
+.saveButton {
+    background-color:lightblue;
+    color: black;
+    border: 1px solid grey;
+    padding:5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 10px;
+}
+
+.saveButton.saved {
+    background-color:rgb(108, 159, 32);
+    color: black;
+    border: 1px solid darkolivegreen;
+}

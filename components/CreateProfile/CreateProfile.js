@@ -51,7 +51,6 @@ export default function CreateProfile () {
             <ShowCreatedProfileInfo newUserInfo={newUserInfo}/> 
             <Papers authorName={newUserInfo?.fullName}/>
           </>}
-        <LoginButton/>
         </>
     )
 };
