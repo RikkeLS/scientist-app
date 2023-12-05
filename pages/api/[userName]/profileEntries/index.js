@@ -2,7 +2,7 @@ import ProfileEntry from '../../../../db/models/ProfileEntry';
 import dbConnect from '../../../../db/dbConnect';
 import User from '../../../../db/models/User';
 
-console.clear()
+
 export default async function handler(request, response) {
     await dbConnect();
     const { userName } = request.query;
@@ -16,7 +16,7 @@ export default async function handler(request, response) {
             const userID = userIDs[userIDs.length-1]
             //-- add userID to entry:
             entry['userID']=userID
-            
+
             await ProfileEntry.create(entry)
             return response.status(201).json({status:'Profile entry created'})
         } catch (error){

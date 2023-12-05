@@ -15,13 +15,13 @@ export default function MainProfile() {
     const [entry, setEntry] = useState();
     const [isContentSaved,setIsContentSaved] = useState(false);
 
-    const {mutate} = useSWR(`/api/${currentPageOwner}/profileEntries`)
+    // const {mutate} = useSWR(`/api/${currentPageOwner}/profileEntries`)
 
    function getProfileContent(entryData) {
         setEntry(entryData)
     }
     async function handleSaveProfileContent() {
-        // console.log('..saving to db..');
+        console.log('..saving to db..');
         const response = fetch(`/api/${currentPageOwner}/profileEntries`,{
             method:'POST',
             headers:{

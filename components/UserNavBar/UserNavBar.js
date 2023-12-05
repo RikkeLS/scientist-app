@@ -18,7 +18,7 @@ export default function UserNavBar({userName}) {
                 />
             </li>
             <li>
-                <Link href='/papers'>Papers</Link>
+                <Link href={`/${userName}/highlights`}>Scientific highlights/results</Link>
             </li>
         </ul>
         

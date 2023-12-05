@@ -3,6 +3,8 @@
 @import './components/SelectAllButton/SelectAllButton.css';
 @import './components/SelectButton/SelectButton.css';
 @import './components/ShowCreatedProfileInfo/ShowCreatedProfileInfo.css';
+@import './components/HighlightForm/HighlightForm.css';
+@import './components/ShowHighlight/ShowHighlight.css';
 
 :root {
     --color-std-text: black;
@@ -37,8 +39,8 @@ button {
     border-radius: 10px;
     margin: 5px;
 }
-a {
-    /* border-bottom:2px solid gray; */
+textarea {
+    resize: none;
 }
 
 ul {
