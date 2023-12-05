@@ -7,13 +7,13 @@ export default  function PapersField ({userName,getPapers}) {
 
     if (isLoading) return (
         <> 
-        <h2 className="papersFieldTitle" >Papers</h2>
+        <h2 className="paperstitle" >Papers</h2>
         <h4>Loading papers ...</h4>
         </>  
     )
     if (error) return (
         <> 
-        <h2 className="papersFieldTitle" >Papers</h2>
+        <h2 className="paperstitle" >Papers</h2>
         <h4>Error! {error.message}</h4>
         </> 
     )
@@ -21,7 +21,7 @@ export default  function PapersField ({userName,getPapers}) {
 
     return (
     <>
-        <h2 className="papersFieldTitle" >Papers on arXiv:</h2>
+        <h2 className="paperstitle" >Papers on arXiv:</h2>
      <ul className='paperOverviewList'>
         {
             papers.map(paper => 

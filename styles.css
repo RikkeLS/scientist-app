@@ -2,10 +2,18 @@
 @import './components/SaveButton/SaveButton.css';
 @import './components/SelectAllButton/SelectAllButton.css';
 @import './components/SelectButton/SelectButton.css';
+@import './components/ShowCreatedProfileInfo/ShowCreatedProfileInfo.css';
 
 :root {
     --color-std-text: black;
     --color-std-background: white;
+    --color-halpha:rgb(175, 30, 66);
+    --color-halpha-tp:rgba(175, 30, 66, 0.2);
+    --color-hbeta:rgb(126, 26, 176);
+    --color-hbeta-tp:rgb(126, 26, 176, 0.2);
+    --color-hgamma:rgb(0, 49, 128);
+    --color-hgamma-tp:rgb(0, 49, 128,0.2);
+
 }
 
 *,

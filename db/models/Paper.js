@@ -5,6 +5,8 @@ const paperSchema = new Schema({
     title:{type:String,required:true},
     userID:{type:Schema.Types.ObjectId,required:true},
     authors:{type:[String],required:true},
+}, {
+    timestamps:true,
 });
 
 const Paper = mongoose.models.Paper || mongoose.model('Paper',paperSchema,'papers');
