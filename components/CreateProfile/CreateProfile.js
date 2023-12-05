@@ -35,10 +35,6 @@ export default function CreateProfile () {
             }
         }
     }
-    if (newUserInfo) {
-        const allNames = newUserInfo?.fullName.split(' ')
-        const lastName = allNames[allNames?.length-1]
-    }
 
 
     return (
