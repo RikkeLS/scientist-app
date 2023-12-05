@@ -1,17 +1,17 @@
 import { useState } from "react";
 
-export default function ProfileContentForm ({papers,handleAddProfileContent}) {
-    const [selectedTemplate,setSelectedTemplate] = useState()
+export default function ProfileContentForm ({papers,getProfileContent}) {
+    const [selectedTemplate,setTemplate] = useState()
 
-    function handleSelectTemplate(event) {
-        setSelectedTemplate(event.target.value)
+    function handleTemplate(event) {
+        setTemplate(event.target.value)
     }
     
     function handleSubmit (event) {
         event.preventDefault()
         const formData = new FormData(event.target);
         const data = Object.fromEntries(formData)
-        handleAddProfileContent(data)
+        getProfileContent(data)
     }
 
     let topCoAuthors;
@@ -42,16 +42,16 @@ export default function ProfileContentForm ({papers,handleAddProfileContent}) {
     return (
         <>
             
-        <label htmlFor="selectTemplate">Select a template:</label>
-        <select defaultValue='basic' onInput={handleSelectTemplate} name="selectTemplate" id="selectTemplate" form='ProfileContentForm'>
+        <label htmlFor="template">Select a template:</label>
+        <select defaultValue='basic' onInput={handleTemplate} name="template" id="template" form='ProfileContentForm'>
             <option value='collaborators'>Collaborators</option>
             <option value='basic'>basic</option>
         </select>
         <form onSubmit={handleSubmit} id='ProfileContentForm'>
 
-        <label htmlFor="fieldTitle" >Field title:</label>
-        {selectedTemplate ? <input defaultValue={selectedTemplate.toUpperCase()} type='text' name="fieldTitle" id="fieldTitle"></input> :
-        <input defaultValue='' type='text' name="fieldTitle" id="fieldTitle"></input> }
+        <label htmlFor="title" >Field title:</label>
+        {selectedTemplate ? <input defaultValue={selectedTemplate.toUpperCase()} type='text' name="title" id="title"></input> :
+        <input defaultValue='' type='text' name="title" id="title"></input> }
         
         {selectedTemplate==='collaborators' ? <>
         <label htmlFor="mainText">Top 5 co-authors:</label>
