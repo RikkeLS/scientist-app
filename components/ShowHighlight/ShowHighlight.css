@@ -28,7 +28,7 @@
 .highlight_favIcon.isFav {
     /* background-color: azure; */
     width: 100px;
-    fill:var(--color-halpha)
+    fill:var(--color-hdelta)
 
     /* fill:"#ff0000"; */
 }
