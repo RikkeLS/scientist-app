@@ -6,13 +6,21 @@ import User from '../../../../db/models/User';
 export default async function handler(request, response) {
     await dbConnect();
     const { userName } = request.query;
+    //--get userID from userName: 
+    const userIDs = await User.find({'userName': { $eq: userName }},{_id:1})//
+    //--need to only have one, now code is not setup to not allow more than one user:
+    const userID = userIDs[userIDs.length-1]
+    if (request.method === 'GET') {
+        const highlights = await Highlight.find({'userID': { $eq: userID }})
+        if (!highlights) {
+            response.status(404).json({ status: `Found no highlights for ${userName}`});
+        }
+        return response.status(200).json(highlights)
+    }
     if (request.method === 'POST') {
         try {
             const highlight = request.body;
-            //--get userID from userName: 
-            const userIDs = await User.find({'userName': { $eq: userName }},{_id:1})//
-            //--need to only have one, now code is not setup to not allow more than one user:
-            const userID = userIDs[userIDs.length-1]
+
             //-- add userID:
             highlight['userID']=userID
 
