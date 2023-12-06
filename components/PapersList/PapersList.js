@@ -85,7 +85,7 @@ export default function PapersList ({authorToFetch,handleNewSearch,addSelectedPa
         </li><li>
         <SelectAllButton action='deselect' onClick={()=>handleDeSelectAllPapers()}>Deselect all papers</SelectAllButton>
         </li><li>
-        <SaveButton onSave={()=>addSelectedPapers(papers,isSelectedInfo)} isSaved={isPaperSaved}/>
+        <SaveButton onSave={()=>addSelectedPapers(papers,isSelectedInfo)} isSaved={isPaperSaved} itemSaved={papers.length===1?  'paper':`${papers.length} papers`}/>
         </li>
         </ul>
  

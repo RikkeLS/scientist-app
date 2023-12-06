@@ -1,13 +1,12 @@
-import Image from "next/image"
-export default function SaveButton({onSave,isSaved}) {
+export default function SaveButton({onSave,isSaved,itemSaved}) {
 
-    console.log('isSaved:',isSaved);
+    console.log('isSaved in button:',isSaved);
     return (
-        <span className={isSaved ? "saveButton saved" : "saveButton"}
-         onClick={onSave}>
-         {isSaved ? 'Saved papers': 'Save papers'}
+        <span role="button" className={isSaved ? "saveButton saved" : "saveButton"}
+         onClick={!isSaved ? onSave : null}>
+         {isSaved ? 'Saved '+itemSaved : 'Save '+itemSaved}
         {/* <Image 
-            src={ isSaved ? 'ticked':'cross.svg'} 
+            src={ isSaved ? 'ticked.svg':'cross.svg'} 
             alt={ isSaved ? 'saved to DB ':'Not Saved to SB'}
             width={10}
         /> */}

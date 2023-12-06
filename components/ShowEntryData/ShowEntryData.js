@@ -17,11 +17,11 @@ export default function ShowEntryData({entry,handleSaveProfileContent,isSaved}) 
             : 
             <p className='ContentField_mainText'>{entry.mainText}</p> 
             }
-            <SaveButton onSave={handleSaveProfileContent} isSaved={isSaved} />
+            <SaveButton onSave={handleSaveProfileContent} isSaved={isSaved} itemSaved={'entry'}/>
         </section> 
                 :
         <section className='showContentField'>
-            <SaveButton onSave={handleSaveProfileContent} isSaved={isSaved} />
+            <SaveButton onSave={handleSaveProfileContent} isSaved={isSaved} itemSaved={'entry'} />
             <h2 className='ContentField_title'>{entry.title}:</h2>
             {formattedEntryText ? <p className='ContentField_mainText'>{formattedEntryText}</p>
             : 
