@@ -74,9 +74,11 @@ export default function PapersList ({authorToFetch,handleNewSearch,addSelectedPa
 
     if (!papers) return (<h1>data not available</h1>)
 
+    const numberOfSelectedPapers = isSelectedInfo?.filter(info => info.isSelected).length
+
     return (
         <> 
-        <h3>Papers on archive from search <em>author: {authorName}</em> </h3>
+        <h3>Papers on arXiv from search <em>author: {authorName}</em> </h3>
         <ul className='papersSelectionButtonList'>
         <li>
         <button className='NewSearchButton' onClick={()=> handleNewSearch()}>New search</button>
@@ -85,12 +87,11 @@ export default function PapersList ({authorToFetch,handleNewSearch,addSelectedPa
         </li><li>
         <SelectAllButton action='deselect' onClick={()=>handleDeSelectAllPapers()}>Deselect all papers</SelectAllButton>
         </li><li>
-        <SaveButton onSave={()=>addSelectedPapers(papers,isSelectedInfo)} isSaved={isPaperSaved} itemSaved={papers.length===1?  'paper':`${papers.length} papers`}/>
+        {numberOfSelectedPapers===0 ? <p>Select papers to save to the profile</p> : 
+        <SaveButton onSave={()=>addSelectedPapers(papers,isSelectedInfo)} isSaved={isPaperSaved} itemSaved={numberOfSelectedPapers===1 ?  'paper':`${numberOfSelectedPapers} papers`}/>
+        }
         </li>
         </ul>
- 
-        
-        {/* <button onClick={()=> addSelectedPapers(papers,isSelectedInfo)}>Save to database</button> */}
                 <ul className='papersList'>
                 {papers?.map( paper =>
                     <Paper key={paper.id} paper={paper} handleSelectPaperToggle={handleSelectPaperToggle} isSelectedInfo={isSelectedInfo} />
