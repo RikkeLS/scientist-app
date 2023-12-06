@@ -61,8 +61,12 @@ export default function Highlights() {
     }
 
 
-    
-    
+    //---sort by created date/time---
+    const highlightsSorted = highlights.sort((a,b)=> 
+    //get a number/integer for all the createdAt dates by removing non-digits(/\D/g ):
+        b.createdAt.replace(/\D/g, '')-a.createdAt.replace(/\D/g, '')
+    )
+
 
     return (
         <>
@@ -76,13 +80,14 @@ export default function Highlights() {
             <ShowHighlight content={content}/>
             </>
             :''} 
-            
             {highlights ? 
-                highlights?.reverse().map( highlight => (
-                    <>
-                     <FavButton content={highlight} favInfo={favInfo} handleToggleFav={handleToggleFav} />
-                    <ShowHighlight key={highlight._id} content={highlight}/> 
-                    </>))
+                (highlightsSorted?.map( highlight => 
+                    <section key={highlight._id} className="highlightContainer" >
+                     <FavButton  content={highlight} favInfo={favInfo} handleToggleFav={handleToggleFav} />
+                    <ShowHighlight content={highlight}/> 
+                    </section>
+                    )
+                )
             :''} 
 
         </>

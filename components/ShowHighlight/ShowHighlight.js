@@ -2,7 +2,7 @@ import Link from "next/link";
 export default function ShowHighlight({content}) {
     return (
         <>
-            <section className="highlightContainer">
+            
             <h3 className="highlight_title">{content.title}</h3>
 
             
@@ -13,7 +13,6 @@ export default function ShowHighlight({content}) {
                 <section className="highlight_extra">
                     <Link href={content.refLink} rel='noopener noreferrer' target='_blank'>{content.refText}  </Link>
                 </section>
-            </section>
 
         </>
 
