@@ -13,6 +13,26 @@
     width: 400px;
 }
 
+.highlight_mainText {
+    text-size-adjust: none;
+    max-height: 200px;
+    max-width: 500px;
+
+}
+.highlight_favIcon {
+    /* background-color: azure; */
+    width: 100px;
+    fill:white;
+    /* fill:"#ff0000"; */
+}
+.highlight_favIcon.isFav {
+    /* background-color: azure; */
+    width: 100px;
+    fill:var(--color-hdelta)
+
+    /* fill:"#ff0000"; */
+}
+
 .highlight_image {
-    max-height: 400px;
+    height: 200px;
 }

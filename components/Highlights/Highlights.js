@@ -1,14 +1,17 @@
-import { useState } from "react";
 import HighlightForm from "../HighlightForm/HighlightForm"
 import ShowHighlight from "../ShowHighlight/ShowHighlight";
 import SaveButton from "../SaveButton/SaveButton";
+import FavButton from "../FavButton/FavButton";
+
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
+import { useState } from "react";
 
 export default function Highlights() {
     const [content, setContent] = useState();
     const [isContentSaved,setIsContentSaved] = useState(false);
+    const [favInfo,setFavInfo] = useState([])
     const {data:session} = useSession()
     const router = useRouter()
     const currentPageOwner = router.query.userName
@@ -39,6 +42,30 @@ export default function Highlights() {
         }
     }  
 
+    //----fav toggling---: 
+
+    function handleToggleFav(id) {
+        console.log('id of highlight',id);
+        const infoForID = favInfo?.find(info => info.highlightID === id)
+        if (!infoForID) {
+            setFavInfo([...favInfo,{highlightID:id,isFav:true}])
+        } 
+        if (infoForID) {
+            setFavInfo(
+                favInfo.map(info=> info.highlightID!==id ?
+                info:{...info,isFav:!info.isFav} )
+            )
+        }
+
+    console.log('favInfo',favInfo);
+    }
+
+
+    //---sort by created date/time---
+    const highlightsSorted = highlights.sort((a,b)=> 
+    //get a number/integer for all the createdAt dates by removing non-digits(/\D/g ):
+        b.createdAt.replace(/\D/g, '')-a.createdAt.replace(/\D/g, '')
+    )
 
 
     return (
@@ -49,13 +76,18 @@ export default function Highlights() {
         }
             { content ?
             <>
-            <ShowHighlight content={content} />
             <SaveButton isSaved={isContentSaved} onSave={handleAddHighlight} itemSaved={'highlight'}/> 
+            <ShowHighlight content={content}/>
             </>
             :''} 
-            
             {highlights ? 
-                highlights?.reverse().map( highlight => (<ShowHighlight key={highlight._id} content={highlight}/> ) )
+                (highlightsSorted?.map( highlight => 
+                    <section key={highlight._id} className="highlightContainer" >
+                     <FavButton  content={highlight} favInfo={favInfo} handleToggleFav={handleToggleFav} />
+                    <ShowHighlight content={highlight}/> 
+                    </section>
+                    )
+                )
             :''} 
 
         </>
