@@ -45,10 +45,14 @@ button {
 textarea {
     resize: none;
 }
-
+a {
+    text-decoration:none;
+    color:var(--color-std-text)
+}
 ul {
     list-style: none;
 }
 li {
     margin: 5px;
 }
+ 
