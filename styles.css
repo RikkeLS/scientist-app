@@ -5,6 +5,7 @@
 @import './components/ShowCreatedProfileInfo/ShowCreatedProfileInfo.css';
 @import './components/HighlightForm/HighlightForm.css';
 @import './components/ShowHighlight/ShowHighlight.css';
+@import './components/Paper/Paper.css';
 
 :root {
     --color-std-text: black;
@@ -17,7 +18,7 @@
     --color-hgamma-tp:rgb(40, 0, 255,0.2);
     --color-hdelta:rgb(126, 0, 219);
     --color-hdelta-tp:rgb(126, 0, 219,0.2);
-
+    --window-width: 1200px;
 }
 
 *,
@@ -28,8 +29,16 @@ box-sizing: border-box;
 
 body {
     margin: 0;
-    font-family: system-ui;
-    width: 1200px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    min-width: var(--window-width);
+    align-items: center;
+    border: 1px solid black;
+    margin: 10px;
+    border-radius: 10px;
+
+}
+#__next {
+    
 }
 
 button {
