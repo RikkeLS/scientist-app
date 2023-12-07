@@ -26,7 +26,7 @@ export default function PapersCollection () {
 
     function handleNewSearch() {
         setAuthorToFetch(null)
-        router.push('/${currentPageOwner}/papers')
+        // router.push('/${currentPageOwner}/papers')
     }
     async function addSelectedPapers(newPapers,isSelectedInfo) {
         const selectedPaperIds = isSelectedInfo.map(info => info.isSelected && info.paperID )
@@ -48,14 +48,18 @@ export default function PapersCollection () {
             setIsPaperSaved(true)
             let timeout;
             function MyTimeOut() {
-                timeout = setTimeout(2000)
+                timeout = setTimeout(afterTimeOut,2000)
             }
             MyTimeOut()
-            mutate()
+            function afterTimeOut() {
+
+            }
+            
             setNumberOfSaves(numberOfSaves+1);
             setAuthorToFetch(null)
-
-
+            setIsAddPapers(false)
+            setIsPaperSaved(false)
+            mutate()
         }
     }
     let addButtonText = 'Add papers'
@@ -66,10 +70,14 @@ export default function PapersCollection () {
         addButtonText='Add even more papers!'
     }
     console.log('numberOfSaves',numberOfSaves);
-    
+    //---sort by created date/time---
+    const papersSorted = papers.sort((a,b)=> 
+    //get a number/integer for all the createdAt dates by removing non-digits(/\D/g ):
+        b.createdAt.replace(/\D/g, '')-a.createdAt.replace(/\D/g, '')
+    )
     return (
         <>
-            {!authorToFetch ?<p>Search to find your papers!</p> :
+            {!authorToFetch ? '' :
             <SelectPapers authorToFetch={authorToFetch} handleNewSearch={handleNewSearch} 
              addSelectedPapers={addSelectedPapers} isPaperSaved={isPaperSaved}/>
             }
@@ -79,7 +87,7 @@ export default function PapersCollection () {
             }
             {isAddPapers && <PaperSearchQuery onSearch={handleSearchByAuthorSubmit}/>}
             <ul className='paperOverviewList'>
-                {papers.reverse().map(paper => 
+                {papersSorted.map(paper => 
                  <Paper key={paper._id} paper={paper}/> )}
             </ul>
 
