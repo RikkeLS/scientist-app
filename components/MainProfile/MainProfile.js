@@ -1,11 +1,11 @@
 import { useSession } from "next-auth/react"
 import { useRouter } from "next/router";
 import PapersField from "../../components/PapersField/PapersField";
-import UserNavBar from "../../components/UserNavBar/UserNavBar";
 import ProfileContentForm from "../../components/ProfileContentForm/ProfileContentForm";
 import { useState } from "react";
 import ShowEntryData from "../../components/ShowEntryData/ShowEntryData";
-import useSWR from "swr";
+import Image from "next/image"
+import useSWR from "swr"
 
 export default function MainProfile() {
     const [papers,setPapers] = useState();
@@ -14,7 +14,8 @@ export default function MainProfile() {
     const currentPageOwner = router.query.userName;
     const [entry, setEntry] = useState();
     const [isContentSaved,setIsContentSaved] = useState(false);
-
+    const {data:userInfo,isLoading,error} = useSWR(`api/${currentPageOwner}/userInfo`)
+    if (isLoading || error) return <h2>Loading...</h2>;
     // const {mutate} = useSWR(`/api/${currentPageOwner}/profileEntries`)
 
    function getProfileContent(entryData) {
@@ -45,7 +46,12 @@ export default function MainProfile() {
         <> {
             session?.user.name===currentPageOwner ? <h1> Your main profile page </h1> : <h1>Main profile page for {currentPageOwner}</h1> 
         }
-            <UserNavBar userName={currentPageOwner}/>
+        <Image
+                src={userInfo.profileImageURL}
+                alt="profile image"
+                width={100}
+                height={100}
+                />
             {session?.user.name===currentPageOwner &&
             <ProfileContentForm getProfileContent={getProfileContent} papers={papers}/> }
             {entry ? <ShowEntryData entry={entry} handleSaveProfileContent={handleSaveProfileContent} isSaved={isContentSaved} />:''}

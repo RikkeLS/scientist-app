@@ -1,24 +1,18 @@
-import Image from "next/image"
 import Link from "next/link"
-import useSWR from "swr"
+import { useRouter } from "next/router";
 
-export default function UserNavBar({userName}) {
-    const {data:userInfo,isLoading,error} = useSWR(`api/${userName}/userInfo`)
-    if (isLoading || error) return <h2>Loading...</h2>;
+export default function UserNavBar() {
+    const router = useRouter();
+    const currentPageOwner = router.query.userName;
     return (
         <>
         <nav>
         <ul>
             <li>
-                <Image
-                src={userInfo.profileImageURL}
-                alt="profile image"
-                width={100}
-                height={100}
-                />
+                <Link href={`/${currentPageOwner}/papers`}>Scientific papers</Link>
             </li>
             <li>
-                <Link href={`/${userName}/highlights`}>Scientific highlights/results</Link>
+                <Link href={`/${currentPageOwner}/highlights`}>Scientific highlights/results</Link>
             </li>
         </ul>
         
