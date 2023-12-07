@@ -4,6 +4,7 @@ export default function ShowHighlight({content}) {
         <>
             
             <h3 className="highlight_title">{content.title}</h3>
+            {content.paperID && <p>PaperID: {content.paperID}</p>}
                 <section className="highlight_mainContent">
                 <img className="highlight_image" src={content.imageURL} alt={content.title}/>
                 <p className="highlight_mainText">{content.mainText}</p>
