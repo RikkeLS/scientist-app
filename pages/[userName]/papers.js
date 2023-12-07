@@ -2,8 +2,10 @@ import PapersList from '../../components/PapersList/PapersList';
 import PaperSearchQuery from '../../components/PaperSearchQuery/PaperSearchQuery';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import LoginButton from '../../components/LoginButton/LoginButton';
 import PapersCollection from '../../components/PapersCollection/PapersCollection';
 import UserNavBar from '../../components/UserNavBar/UserNavBar';
+import Link from 'next/link';
 
 export default function papersPage () {
     // const router = useRouter()
@@ -42,6 +44,8 @@ export default function papersPage () {
         {/* <PaperSearchQuery onSearch={handleSearchByAuthorSubmit}/>
         {!authorToFetch ?<div>Search to find your papers!</div> :
         <PapersList authorToFetch={authorToFetch} handleNewSearch={handleNewSearch} addPapers={addPapers} />} */}
+        <LoginButton/>
+        <Link href={'/'}>Go to homepage</Link>
         </>
     );
 };
