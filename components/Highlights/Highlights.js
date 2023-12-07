@@ -38,14 +38,11 @@ export default function Highlights() {
             if (response.ok) {
                 setIsContentSaved(true)
                 mutate()
-
         }
     }  
 
     //----fav toggling---: 
-
     function handleToggleFav(id) {
-        console.log('id of highlight',id);
         const infoForID = favInfo?.find(info => info.highlightID === id)
         if (!infoForID) {
             setFavInfo([...favInfo,{highlightID:id,isFav:true}])
@@ -56,8 +53,6 @@ export default function Highlights() {
                 info:{...info,isFav:!info.isFav} )
             )
         }
-
-    console.log('favInfo',favInfo);
     }
 
 

@@ -1,4 +1,11 @@
+import { useState } from "react";
+import useSWR from "swr";
+import { useRouter } from "next/router";
+
 export default function HighlightForm({getHighlightContent}) {
+    const [isSelectPaperRef,setisSelectPaperRef] = useState(false)
+    const router = useRouter()
+    const currentPageOwner = router.query.userName
 
     function handleSubmit (event) {
         event.preventDefault()
@@ -6,6 +13,20 @@ export default function HighlightForm({getHighlightContent}) {
         const data = Object.fromEntries(formData)
         getHighlightContent(data)
     }
+
+    function checkCheckBox (event) {
+        // event.preventDefault()?
+        console.log('event.target.value',event.target.value);
+        if (event.target.value) {
+            setisSelectPaperRef(true)
+        } else {
+            setisSelectPaperRef(false)
+        }
+    }
+    const { data:papers, isLoading, error } = useSWR(`/api/${currentPageOwner}/papers`)
+
+    if (isLoading) return (<div> Loading papers... </div>)
+    if (error) return ( <div>Error! {error.message}</div>)
 
     return (
         <>
@@ -27,6 +48,17 @@ export default function HighlightForm({getHighlightContent}) {
             <input id="imageURLHighlight" name='imageURL'
                 defaultValue='https://www.aanda.org/articles/aa/full_html/2017/10/aa31055-17/aa31055-17-fig11.jpg'
             />
+            <label htmlFor="isPaperRef">Reference one of your papers (optional)</label>
+        <input onInput={checkCheckBox} type='checkbox' name='isPaperRef' id='isPaperRef' form='formHighlight'/>
+        {isSelectPaperRef ?
+        <>
+        <label htmlFor="selectPaperHighlight">Choose a paper (optional):</label>
+        <select id='selectPaperHighlight' name='paperID' defaultValue='none' form='formHighlight'>
+        {papers.map(paper => 
+        <option key={paper._id} value={paper._id}>{paper.title}</option>
+        )}
+        </select>
+        </>:''}
             <label htmlFor="refLinkHighlight">Reference link:</label>
             <input id='refLinkHighlight' name='refLink'
             defaultValue='https://www.aanda.org/articles/aa/full_html/2017/10/aa31055-17/aa31055-17.html'
