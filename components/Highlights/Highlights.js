@@ -13,7 +13,8 @@ export default function Highlights() {
     const [isContentSaved,setIsContentSaved] = useState(false);
     const [favInfo,setFavInfo] = useState([])
     const [isAddHighlight,setIsAddHighlight] = useState(false);
-    const [favCountInfo,setFavCountInfo] = useState([])
+    // const [favCountInfo,setFavCountInfo] = useState([])
+    // const [favChange,setFavChange] = useState()
     const {data:session} = useSession()
     const router = useRouter()
     const currentPageOwner = router.query.userName
@@ -29,12 +30,13 @@ export default function Highlights() {
 
 
     async function handleAddHighlight() {
+        const contentWithFavCount = {...content,favCount:0}
         const response = await fetch(`/api/${currentPageOwner}/highlights`, {
                 method:'POST',
                 headers:{
                     'Content-Type':'application/json'
                 },
-                body:JSON.stringify(content)
+                body:JSON.stringify(contentWithFavCount)
             },
             )
             if (response.ok) {
@@ -42,31 +44,63 @@ export default function Highlights() {
                 mutate()
         }
     }  
+    async function handleUpdateHighlight(favCountUpdated) {
+        console.log('updatedFavCountInfo frontend',favCountUpdated);
+        const response = await fetch(`/api/${currentPageOwner}/highlights`, {
+            method:'PATCH',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify(favCountUpdated)
+        },
+        )
+        if (response.ok) {
+            console.log('updated')
+        }
+    }
 
     //----fav toggling--with fav counter-: 
     function handleToggleFav(id) {
         const infoForID = favInfo?.find(info => info.highlightID === id)
+        
+        // if (infoForID.isFav) {
+        //     favChange = {highlightID:id,favChange:-1}
+        //     // favChange = -1
+        // } 
+        const highlightForID = highlights.find(highlight => highlight._id === id)
+        let favCountInfo = {highlightID:id,favCount:highlightForID.favCount}
 
+        // setFavChange({highlightID:id,favChange:favChange})
         if (infoForID) {
             let favChange = 1;
             if (infoForID.isFav) {
                 favChange = -1
             }
+            favCountInfo['favCount']=favCountInfo['favCount']+favChange
+            // let favChange = {highlightID:id,favChange:-1}
+            // if (!infoForID.isFav) {
+            //     favChange = {highlightID:id,favChange:1}
+            // }
+            
+
             setFavInfo(
                 favInfo.map(info=> info.highlightID!==id ?
                 info:{...info,isFav:!info.isFav})
             )
-            setFavCountInfo(
-                favCountInfo.map(info=> info.highlightID!==id ?
-                info:{...info,favCount:info.favCount+favChange} )
-            )
+            // setFavCountInfo(
+            //     favCountInfo.map(info=> info.highlightID!==id ?
+            //     info:{...info,favCount:info.favCount+favChange} )
+            // )
+
         }
         if (!infoForID) {
-            setFavCountInfo([...favCountInfo,{highlightID:id,favCount:1}])
-
-            setFavInfo([...favCountInfo,{highlightID:id,isFav:true}])
+            // setFavCountInfo([...favCountInfo,{highlightID:id,favCount:1}])
+            setFavInfo([...favInfo,{highlightID:id,isFav:true}])
+            favCountInfo['favCount']++
         } 
+        handleUpdateHighlight(favCountInfo);
     }
+    // console.log('favCountInfo',favCountInfo);
 
 
     //---sort by created date/time---
@@ -74,7 +108,6 @@ export default function Highlights() {
     //get a number/integer for all the createdAt dates by removing non-digits(/\D/g ):
         b.createdAt.replace(/\D/g, '')-a.createdAt.replace(/\D/g, '')
     )
-
 
     return (
         <>
