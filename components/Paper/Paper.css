@@ -10,6 +10,14 @@
 
 }
 
+/* in SelectPapers: */
+.papersSelectionList {
+    display: flex;
+    flex-wrap:wrap;
+    gap: 30px;
+    width: var(--window-width);
+    justify-content: center;
+}
 
 /* in Papers */
 .paperContainer {
@@ -26,7 +34,7 @@
 
 .paper_title {
     text-align: center;
-    font-size: medium;
+    font-size: 0.5em;
 }
 
 .paper_abstract {

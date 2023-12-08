@@ -79,7 +79,7 @@ export default function PapersCollection () {
         <>
             {!authorToFetch ? '' :
             <SelectPapers authorToFetch={authorToFetch} handleNewSearch={handleNewSearch} 
-             addSelectedPapers={addSelectedPapers} isPaperSaved={isPaperSaved}/>
+             addSelectedPapers={addSelectedPapers} isPaperSaved={isPaperSaved} isAddPapers={isAddPapers}/>
             }
             <h2 className="papersTitle" >Papers on arXiv:</h2>
             {session?.user.name===currentPageOwner && 

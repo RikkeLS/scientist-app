@@ -4,7 +4,7 @@ import Paper from '../Paper/Paper';
 import SaveButton from '../SaveButton/SaveButton';
 import SelectAllButton from '../SelectAllButton/SelectAllButton';
 
-export default function SelectPapers ({authorToFetch,handleNewSearch,addSelectedPapers,isPaperSaved}) {
+export default function SelectPapers ({authorToFetch,handleNewSearch,addSelectedPapers,isPaperSaved,isAddPapers}) {
     //--- arXiv-api Wrapper:
     //parameters:
     const prefix = 'au'// for author: https://info.arxiv.org/help/api/user-manual.html#51-details-of-query-construction
@@ -92,9 +92,9 @@ export default function SelectPapers ({authorToFetch,handleNewSearch,addSelected
         }
         </li>
         </ul>
-                <ul className='papersList'>
+                <ul className='papersSelectionList'>
                 {papers?.map( paper =>
-                    <Paper key={paper.id} paper={paper} handleSelectPaperToggle={handleSelectPaperToggle} isSelectedInfo={isSelectedInfo} />
+                    <Paper key={paper.id} paper={paper} handleSelectPaperToggle={handleSelectPaperToggle} isSelectedInfo={isSelectedInfo} isAddPapers={isAddPapers}/>
                 )}
                     
                 </ul>

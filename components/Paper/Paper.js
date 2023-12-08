@@ -4,7 +4,7 @@ import Link from "next/link"
 import { useRouter } from "next/router";
 import StyledPaperListItem from "../StyledPaperListItem/StyledPaperListItem";
 
-export default function Paper({paper,isSelectedInfo, handleSelectPaperToggle}) {
+export default function Paper({paper,isSelectedInfo, isAddPapers, handleSelectPaperToggle}) {
     const router = useRouter();
     const currentPageOwner = router.query.userName;
     //--ids of highlights if it exists:
@@ -17,6 +17,9 @@ export default function Paper({paper,isSelectedInfo, handleSelectPaperToggle}) {
 
     //--format authors:
     const formattedAuthors = paper.authors.map((author,index)=> {
+        if (paper.authors.length===1) {
+            return author
+        }
         if (index === paper.authors.length-2) {
             return author
         }
@@ -29,7 +32,7 @@ export default function Paper({paper,isSelectedInfo, handleSelectPaperToggle}) {
     })
 
     return (
-    <StyledPaperListItem key={paper.id}>
+    <StyledPaperListItem key={paper.id} forSelection={isAddPapers}>
         {isSelectedInfo !== undefined && <SelectButton isSelectedInfo={isSelectedInfo} paperID={paper.id} handleSelectPaperToggle={handleSelectPaperToggle}/>}
         
         <h3 className="paper_title">{paper.title}</h3>
