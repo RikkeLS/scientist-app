@@ -36,7 +36,7 @@ export default function Papers ({authorName}) {
         const selectedPapersForDB = selectedPapers.map(paper =>
            ({...paper,authors:paper['authors'].flat(1)})
         )
-        const response = await fetch('api/create-profile-papers', {
+        const response = await fetch('/api/create-profile-papers', {
             method:'POST',
             headers: {
                 'Content-Type':'application/json',

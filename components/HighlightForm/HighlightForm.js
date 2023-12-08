@@ -15,8 +15,6 @@ export default function HighlightForm({getHighlightContent}) {
     }
 
     function checkCheckBox (event) {
-        // event.preventDefault()?
-        console.log('event.target.value',event.target.value);
         if (event.target.value) {
             setisSelectPaperRef(true)
         } else {
