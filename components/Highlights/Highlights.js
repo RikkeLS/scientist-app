@@ -12,6 +12,8 @@ export default function Highlights() {
     const [content, setContent] = useState();
     const [isContentSaved,setIsContentSaved] = useState(false);
     const [favInfo,setFavInfo] = useState([])
+    const [isAddHighlight,setIsAddHighlight] = useState(false);
+    const [favCountInfo,setFavCountInfo] = useState([])
     const {data:session} = useSession()
     const router = useRouter()
     const currentPageOwner = router.query.userName
@@ -41,18 +43,29 @@ export default function Highlights() {
         }
     }  
 
-    //----fav toggling---: 
+    //----fav toggling--with fav counter-: 
     function handleToggleFav(id) {
         const infoForID = favInfo?.find(info => info.highlightID === id)
-        if (!infoForID) {
-            setFavInfo([...favInfo,{highlightID:id,isFav:true}])
-        } 
+
         if (infoForID) {
+            let favChange = 1;
+            if (infoForID.isFav) {
+                favChange = -1
+            }
             setFavInfo(
                 favInfo.map(info=> info.highlightID!==id ?
-                info:{...info,isFav:!info.isFav} )
+                info:{...info,isFav:!info.isFav})
+            )
+            setFavCountInfo(
+                favCountInfo.map(info=> info.highlightID!==id ?
+                info:{...info,favCount:info.favCount+favChange} )
             )
         }
+        if (!infoForID) {
+            setFavCountInfo([...favCountInfo,{highlightID:id,favCount:1}])
+
+            setFavInfo([...favCountInfo,{highlightID:id,isFav:true}])
+        } 
     }
 
 
@@ -66,8 +79,12 @@ export default function Highlights() {
     return (
         <>
         <h2>Scientific results</h2>
-        {session?.user.name===currentPageOwner &&
-            <HighlightForm getHighlightContent={getHighlightContent}/>
+        {session?.user.name===currentPageOwner && 
+        <>
+            <button onClick={()=>setIsAddHighlight( !isAddHighlight )} >{!isAddHighlight ? 'Add entry': 'Hide entry form'}</button>
+            {isAddHighlight &&  <HighlightForm getHighlightContent={getHighlightContent}/> }
+            
+        </>
         }
             { content ?
             <>
