@@ -19,6 +19,8 @@
     --color-hdelta:rgb(126, 0, 219);
     --color-hdelta-tp:rgb(126, 0, 219,0.2);
     --window-width: 1200px;
+    --width-favIcon:200px;
+    --height-highlight: 330px;
 }
 
 *,
@@ -31,14 +33,19 @@ body {
     margin: 0;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     min-width: var(--window-width);
+    width: max-content;
     align-items: center;
-    border: 1px solid black;
-    margin: 10px;
-    border-radius: 10px;
+    padding: 10px;
+    /* margin: 10px; */
+
+
 
 }
 #__next {
-    
+    /* margin-right: 20px; */
+    border: 1px solid black;
+    border-radius: 10px;
+    padding-right: 40px ;
 }
 
 button {

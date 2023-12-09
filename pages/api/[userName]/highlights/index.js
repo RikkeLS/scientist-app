@@ -30,4 +30,18 @@ export default async function handler(request, response) {
             return response.status(400).json({error:error.message})
         }
     }
+    if (request.method==='PATCH') {
+        try {
+            const favChangeInfo = request.body;
+            const highlightToUpdate = await Highlight.findById(favChangeInfo.highlightID)
+            
+            await Highlight.findByIdAndUpdate(favChangeInfo.highlightID,{
+                $set: {favCount:highlightToUpdate.favCount+favChangeInfo.favChange}
+            })
+            return response.status(201).json({status:'Highlight favCount updated'})
+        } catch (error){
+            return response.status(400).json({error:error.message})
+        }
+    }
+    
 }

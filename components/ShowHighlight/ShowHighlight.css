@@ -1,38 +1,70 @@
 .highlightContainer {
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
+    /* min-width: 1100px; */
 }
 
 .highlight_mainContent {
     display: flex;
 }
+.highlight_titleContainer {
+    
+    text-align: center;
+    height: var(--height-highlight);
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* text-align: center; */
+    width: 300px;
+    font-size: 1vw;
+    border: 1px solid black;
+}
+
 
 .highlight_title {
+    display: flex;
     align-self: center;
-    text-align: center;
-    width: 400px;
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
+    padding: 20px;
+    line-height: 40px; 
+}
+.highlight_refLink {
+    position: relative;
+    /* right: 40px;
+    top: 200px; */
 }
 
 .highlight_mainText {
     text-size-adjust: none;
-    max-height: 200px;
+    max-height: var(--height-highlight);
     max-width: 500px;
 
 }
+.highlight_image {
+    height: var(--height-highlight);
+}
 .highlight_favIcon {
     /* background-color: azure; */
-    width: 100px;
+    width: var(--width-favIcon);
+    /* position: relative; */
+    /* right: 100px; */
+    /* width: 100px; */
     fill:white;
     /* fill:"#ff0000"; */
 }
+.highlight_favIconContainer {
+    width: var(--width-favIcon);
+    position: relative; 
+    left: 200px;
+}
 .highlight_favIcon.isFav {
     /* background-color: azure; */
-    width: 100px;
-    fill:var(--color-hdelta)
+    width: var(--width-favIcon);
+    fill:var(--color-hdelta);
 
     /* fill:"#ff0000"; */
 }
 
-.highlight_image {
-    height: 200px;
-}

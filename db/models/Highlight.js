@@ -6,6 +6,7 @@ const highlightSchema = new Schema({
     imageURL:{type:String},
     refLink:{type:String},
     refText:{type:String},
+    favCount:{type:Number},
     userID:{type:Schema.Types.ObjectId,required:true,ref: "User"},
     paperID:{type:Schema.Types.ObjectId, ref: "Paper"}
 }, {
