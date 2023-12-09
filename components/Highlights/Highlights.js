@@ -7,18 +7,22 @@ import useSWR from "swr";
 import {  useState } from "react";
 import useLocalStorageState from "use-local-storage-state";
 import SortingSetting from "../SortingSetting/SortingSetting";
+import FilterSetting from "../FilterSetting/FilterSetting";
+import HighlightsList from "../HighlightsList/HighlightsList";
 
 export default function Highlights() {
     const [content, setContent] = useState();
     const [isContentSaved,setIsContentSaved] = useState(false);
-    const [favInfo,setFavInfo] = useState([])
+    const [favInfo,setFavInfo] = useLocalStorageState('favInfo', {
+        defaultValue:[]});// useState() //useState(('favInfo'));
     const [isAddHighlight,setIsAddHighlight] = useState(false);
-    const [sortedBy,setSortedBy] = useLocalStorageState(('sortedBy', {
-            defaultValue: 'newest' }))
+    const [sortedBy,setSortedBy] = useLocalStorageState('sortedBy', {
+            defaultValue: 'newest' });
     const [highlightsSorted,setHighlightsSorted] = useState([]);
-    const {data:session} = useSession()
-    const router = useRouter()
-    const currentPageOwner = router.query.userName
+    const [isFavFilter,setIsFavFilter] = useLocalStorageState('isFavFilter',{defaultValue:false});
+    const {data:session} = useSession();
+    const router = useRouter();
+    const currentPageOwner = router.query.userName;
 
     function getHighlightContent (formContent) {
         setContent(formContent)
@@ -108,6 +112,17 @@ export default function Highlights() {
         if (sortSetting==='mostFav') setHighlightsSorted(sortByMostFav())
     }
 
+    //--filter by fav:
+    const favedIDs = favInfo?.map(info => info.isFav && info.highlightID)
+
+    
+    const favHighlightsSorted = highlightsSorted.filter(highlight =>
+        favedIDs && favedIDs?.includes(highlight._id) )
+    const firstFavHighlights = firstHighligts?.filter(highlight =>
+        favedIDs && favedIDs?.includes(highlight._id))
+    function handleFilterSetting() {
+        setIsFavFilter(!isFavFilter)
+    }
 
     return (
         <>
@@ -126,20 +141,14 @@ export default function Highlights() {
             </>} 
             {highlights ? 
             <>
+            <FilterSetting isFavFilter={isFavFilter} handleFilterSetting={handleFilterSetting}/>
             <SortingSetting handleSortingHighlights={handleSortingHighlights} sortedBy={sortedBy}/>
             {firstHighligts ? 
-                (firstHighligts?.map( highlight => 
-                    <section key={highlight._id} className="highlightContainer" >
-                    <ShowHighlight favInfo={favInfo} handleToggleFav={handleToggleFav} content={highlight}/> 
-                    </section>
-                    )
-                ):
-                (highlightsSorted?.map( highlight => 
-                    <section key={highlight._id} className="highlightContainer" >
-                    <ShowHighlight favInfo={favInfo} handleToggleFav={handleToggleFav} content={highlight}/> 
-                    </section>
-                    )
-                )
+            <HighlightsList 
+            highlights={isFavFilter ? firstFavHighlights:firstHighligts} 
+            handleToggleFav={handleToggleFav} favInfo={favInfo}/>:
+             <HighlightsList highlights={ isFavFilter ? favHighlightsSorted : highlightsSorted} 
+             handleToggleFav={handleToggleFav} favInfo={favInfo}/>
             }
             </>
             :<p > No highlights added for this profile</p>}
