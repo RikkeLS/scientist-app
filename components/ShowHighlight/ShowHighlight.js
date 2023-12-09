@@ -1,16 +1,18 @@
 import Link from "next/link";
-export default function ShowHighlight({content}) {
+import FavButton from "../FavButton/FavButton";
+export default function ShowHighlight({content,favInfo,handleToggleFav}) {
     return (
         <>
+            <section className="highlight_titleContainer">
+            <FavButton  content={content} favInfo={favInfo} handleToggleFav={handleToggleFav} />
+                <h3 className="highlight_title">{content.title}</h3>
+                <Link className="highlight_refLink" href={content.refLink} rel='noopener noreferrer' target='_blank'>{content.refText}  </Link>
+            </section>
             
-            <h3 className="highlight_title">{content.title}</h3>
-            {content.paperID && <p>PaperID: {content.paperID}</p>}
+            {/* {content.paperID && <p>PaperID: {content.paperID}</p>} */}
                 <section className="highlight_mainContent">
                 <img className="highlight_image" src={content.imageURL} alt={content.title}/>
                 <p className="highlight_mainText">{content.mainText}</p>
-                </section>
-                <section className="highlight_extra">
-                    <Link href={content.refLink} rel='noopener noreferrer' target='_blank'>{content.refText}  </Link>
                 </section>
         </>
 

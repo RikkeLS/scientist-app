@@ -109,8 +109,8 @@ export default function Highlights() {
             {highlights ? 
                 (highlightsSorted?.map( highlight => 
                     <section key={highlight._id} className="highlightContainer" >
-                     <FavButton  content={highlight} favInfo={favInfo} handleToggleFav={handleToggleFav} />
-                    <ShowHighlight content={highlight}/> 
+                     {/* <FavButton  content={highlight} favInfo={favInfo} handleToggleFav={handleToggleFav} /> */}
+                    <ShowHighlight content={highlight} favInfo={favInfo} handleToggleFav={handleToggleFav}/> 
                     </section>
                     )
                 )
