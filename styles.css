@@ -19,7 +19,7 @@
     --color-hgamma-tp:rgb(40, 0, 255,0.2);
     --color-hdelta:rgb(126, 0, 219);
     --color-hdelta-tp:rgb(126, 0, 219,0.2);
-    --window-width: 1200px;
+    --width-window: 1200px;
     --width-favIcon:200px;
     --height-highlight: 330px;
 }
@@ -33,7 +33,7 @@ box-sizing: border-box;
 body {
     margin: 0;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    min-width: var(--window-width);
+    min-width: var(--width-window);
     width: max-content;
     align-items: center;
     padding: 10px;

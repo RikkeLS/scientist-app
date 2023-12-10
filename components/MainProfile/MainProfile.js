@@ -1,9 +1,10 @@
-import { useSession } from "next-auth/react"
-import { useRouter } from "next/router";
 import PapersField from "../../components/PapersField/PapersField";
 import ProfileContentForm from "../../components/ProfileContentForm/ProfileContentForm";
-import { useState } from "react";
+import { GridLayout,PapersFieldPlacement, ProfileImagePlacement,ContentPlacement } from "../../components/GridSettings/GridSettings"
 import ShowEntryData from "../../components/ShowEntryData/ShowEntryData";
+import { useState } from "react";
+import { useSession } from "next-auth/react"
+import { useRouter } from "next/router";
 import Image from "next/image"
 import useSWR from "swr"
 
@@ -49,26 +50,40 @@ export default function MainProfile() {
         <> {
             session?.user.name===currentPageOwner ? <h1> Your main profile page </h1> : <h1>Main profile page for {currentPageOwner}</h1> 
         }
-        <Image
-                src={userInfo.profileImageURL}
-                alt="profile image"
-                width={100}
-                height={100}
-                />
+        
         {session?.user.name===currentPageOwner &&
         <ProfileContentForm getProfileContent={getProfileContent} papers={papers}/> }
         {entry && 
         <ShowEntryData entry={entry}
             handleSaveProfileContent={handleSaveProfileContent}
             isSaved={isContentSaved} />}
+       
+       
+        <GridLayout>
+        <ContentPlacement>
         { entries &&
             entries.map(entry=>
             <ShowEntryData key={entry._id} entry={entry}
             handleSaveProfileContent={handleSaveProfileContent}/>
             )
         }
+        </ContentPlacement>
+        <ProfileImagePlacement>
+             <Image
+                src={userInfo.profileImageURL}
+                alt="profile image"
+                width={100}
+                height={100}
+                />
+        </ProfileImagePlacement>
 
-            <PapersField papers={papers} isLoadingPapers={isLoadingPapers} errorPapers={errorPapers}/>
+
+        
+        <PapersFieldPlacement>
+        <PapersField papers={papers} isLoadingPapers={isLoadingPapers} errorPapers={errorPapers}/>
+        </PapersFieldPlacement>
+        </GridLayout>
+        
         </>
     )
 }
