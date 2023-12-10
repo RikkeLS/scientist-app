@@ -23,6 +23,9 @@ export default function Home() {
         <li>
         <Link href={'/RikkeLS'}>Link to RikkeLS</Link>
         </li>
+        <li>
+        <Link href={'/RikkeTesting'}>Test profile</Link>
+        </li>
       </ul>
 
       </nav>
