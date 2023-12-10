@@ -23,7 +23,26 @@ const UpperLeftSection = styled.section`
 const DynamicSection = styled.section`
     grid-row: 2;
     grid-column: 1/3;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap:10px;
+    margin-left: 10px;
 `
+const GridEntryPlacement = styled.div`
+    grid-row: ${({rowNumber})=>(rowNumber)};
+    grid-column: 1/span ${({columnSpan})=>(columnSpan)};
+`
+
+export function GridEntry({children,rowNumber,columnSpan}){
+    return (
+        <GridEntryPlacement
+         rowNumber={rowNumber}
+         columnSpan={columnSpan}>
+         {children}</GridEntryPlacement>
+
+    )
+}
+
 
 export function PapersFieldPlacement({children}) {
     return (

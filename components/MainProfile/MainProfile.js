@@ -1,6 +1,6 @@
 import PapersField from "../../components/PapersField/PapersField";
 import ProfileContentForm from "../../components/ProfileContentForm/ProfileContentForm";
-import { GridLayout,PapersFieldPlacement, ProfileImagePlacement,ContentPlacement } from "../../components/GridSettings/GridSettings"
+import { GridLayout,PapersFieldPlacement, ProfileImagePlacement,ContentPlacement,GridEntry } from "../../components/GridSettings/GridSettings"
 import ShowEntryData from "../../components/ShowEntryData/ShowEntryData";
 import { useState } from "react";
 import { useSession } from "next-auth/react"
@@ -24,6 +24,8 @@ export default function MainProfile() {
         setEntry(entryData)
     }
     async function handleSaveProfileContent() {
+        //place new entries last:
+        entry['rowNumber']=entries?.length+1;
         const response = await fetch(`/api/${currentPageOwner}/profileEntries`,{
             method:'POST',
             headers:{
@@ -45,6 +47,24 @@ export default function MainProfile() {
             MyTimeOut()
         }
     }
+    async function handleChangePosition (entryID,direction) {
+        // const entryToMove = entries.find(entry => entry._id===entryID)
+        // console.log('entryToMove',entryToMove);
+        let rowChange
+        if (direction==='up') rowChange= -1;
+        if (direction==='down') rowChange= 1;
+        const response = await fetch(`/api/${currentPageOwner}/profileEntries`, {
+            method:'PATCH',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({rowChange:rowChange,entryID:entryID})
+        },
+        )
+        if (response.ok) {
+            mutateEntries()
+        }
+    }
     
     return (
         <> {
@@ -62,9 +82,17 @@ export default function MainProfile() {
         <GridLayout>
         <ContentPlacement>
         { entries &&
-            entries.map(entry=>
+            entries.map((entry)=>
+            <>
+            <GridEntry 
+             rowNumber={entry.rowNumber}
+             columnSpan={2}
+             >
             <ShowEntryData key={entry._id} entry={entry}
-            handleSaveProfileContent={handleSaveProfileContent}/>
+            handleChangePosition={handleChangePosition}    
+            />
+            </GridEntry>
+            </>
             )
         }
         </ContentPlacement>
