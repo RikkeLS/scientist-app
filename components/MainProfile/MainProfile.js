@@ -3,7 +3,7 @@ import ProfileContentForm from "../../components/ProfileContentForm/ProfileConte
 import { GridLayout,PapersFieldPlacement, ProfileImagePlacement,ContentPlacement,GridEntry } from "../../components/GridSettings/GridSettings"
 import ShowEntryData from "../../components/ShowEntryData/ShowEntryData";
 import { useState } from "react";
-import { useSession } from "next-auth/react"
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import Image from "next/image"
 import useSWR from "swr"
@@ -85,11 +85,14 @@ export default function MainProfile() {
             entries.map((entry)=>
             <>
             <GridEntry 
-             rowNumber={entry.rowNumber}
-             columnSpan={2}
+             key={entry.rowNumber}
+             $rownumber={entry.rowNumber}
+             $columnspan={2}
              >
-            <ShowEntryData key={entry._id} entry={entry}
-            handleChangePosition={handleChangePosition}    
+            <ShowEntryData key={entry._id} 
+            entry={entry}
+            handleChangePosition={handleChangePosition} 
+            numberOfEntries={entries.length}   
             />
             </GridEntry>
             </>

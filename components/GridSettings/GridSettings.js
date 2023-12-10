@@ -6,11 +6,7 @@ const Layout = styled.div`
     gap:10px;
     width:var(--width-window);
 `
-export function GridLayout({children}) {
-    return (
-        <Layout>{children}</Layout>
-    )
-}
+
 
 const UpperRightSection = styled.section`
     grid-row:1/4;
@@ -29,15 +25,15 @@ const DynamicSection = styled.section`
     margin-left: 10px;
 `
 const GridEntryPlacement = styled.div`
-    grid-row: ${({rowNumber})=>(rowNumber)};
-    grid-column: 1/span ${({columnSpan})=>(columnSpan)};
+    grid-row: ${({$rownumber})=>($rownumber)};
+    grid-column: 1/span ${({$columnspan})=>($columnspan)};
 `
 
-export function GridEntry({children,rowNumber,columnSpan}){
+export function GridEntry({children,$rownumber,$columnspan}){
     return (
         <GridEntryPlacement
-         rowNumber={rowNumber}
-         columnSpan={columnSpan}>
+         $rownumber={$rownumber}
+         $columnspan={$columnspan}>
          {children}</GridEntryPlacement>
 
     )
@@ -58,5 +54,11 @@ export function ProfileImagePlacement({children}) {
 export function ContentPlacement({children}) {
     return (
         <DynamicSection>{children}</DynamicSection>
+    )
+}
+
+export function GridLayout({children}) {
+    return (
+        <Layout>{children}</Layout>
     )
 }
