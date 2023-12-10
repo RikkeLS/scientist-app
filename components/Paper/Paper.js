@@ -3,8 +3,9 @@ import SelectButton from "../SelectButton/SelectButton"
 import Link from "next/link"
 import { useRouter } from "next/router";
 import StyledPaperListItem from "../StyledPaperListItem/StyledPaperListItem";
+import DeleteButton from "../DeleteButton/DeleteButton";
 
-export default function Paper({paper,isSelectedInfo, isAddPapers, handleSelectPaperToggle}) {
+export default function Paper({paper,isSelectedInfo, isAddPapers, handleSelectPaperToggle,handleDeletePaper}) {
     const router = useRouter();
     const currentPageOwner = router.query.userName;
     //--ids of highlights if it exists:
@@ -34,7 +35,7 @@ export default function Paper({paper,isSelectedInfo, isAddPapers, handleSelectPa
     return (
     <StyledPaperListItem key={paper.id} forSelection={isAddPapers}>
         {isSelectedInfo !== undefined && <SelectButton isSelectedInfo={isSelectedInfo} paperID={paper.id} handleSelectPaperToggle={handleSelectPaperToggle}/>}
-        
+        <DeleteButton handleDelete={handleDeletePaper} ID={paper._id}/>
         <h3 className="paper_title">{paper.title}</h3>
         <ul className='paper_authorsList'>
         {formattedAuthors.map((author) => <li className='paper_author' key={author}>{author}</li>)}

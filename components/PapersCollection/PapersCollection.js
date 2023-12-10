@@ -26,7 +26,19 @@ export default function PapersCollection () {
 
     function handleNewSearch() {
         setAuthorToFetch(null)
-        // router.push('/${currentPageOwner}/papers')
+    }
+    async function handleDeletePaper(paperID) {
+        const response = await fetch(`/api/${currentPageOwner}/papers`, {
+            method:'DELETE',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify(paperID)
+        },
+        )
+        if (response.ok) {
+            mutate()
+        }
     }
     async function addSelectedPapers(newPapers,isSelectedInfo) {
         const selectedPaperIds = isSelectedInfo.map(info => info.isSelected && info.paperID )
@@ -54,7 +66,6 @@ export default function PapersCollection () {
             function afterTimeOut() {
 
             }
-            
             setNumberOfSaves(numberOfSaves+1);
             setAuthorToFetch(null)
             setIsAddPapers(false)
@@ -69,7 +80,6 @@ export default function PapersCollection () {
     if (numberOfSaves > 1) {
         addButtonText='Add even more papers!'
     }
-    console.log('numberOfSaves',numberOfSaves);
     //---sort by created date/time---
     const papersSorted = papers.sort((a,b)=> 
     //get a number/integer for all the createdAt dates by removing non-digits(/\D/g ):
@@ -88,7 +98,9 @@ export default function PapersCollection () {
             {isAddPapers && <PaperSearchQuery onSearch={handleSearchByAuthorSubmit}/>}
             <ul className='paperOverviewList'>
                 {papersSorted.map(paper => 
-                 <Paper key={paper._id} paper={paper}/> )}
+                 <Paper key={paper._id} paper={paper}
+                    handleDeletePaper={handleDeletePaper}
+                 /> )}
             </ul>
 
         </>

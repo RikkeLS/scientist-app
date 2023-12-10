@@ -46,7 +46,6 @@ export default async function handler(request, response) {
     if (request.method === 'DELETE') {
         try {
             const highlightID = request.body;
-            console.log('id',highlightID);
             await Highlight.findByIdAndDelete(highlightID)
             return response.status(201).json({status:'Highlight deleted'})
         } catch (error){

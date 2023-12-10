@@ -81,10 +81,6 @@ export default function Highlights() {
         )
         if (response.ok) {
             mutate()
-            // console.log('response.ok',response.ok);
-            // const { data:newData, isReLoading, errorReloading} = useSWR(`/api/${currentPageOwner}/highlights`)
-            // if (isReLoading || errorReloading) return <h2>Loading...</h2>;
-            // setContent(newData)
         }
     }
     
