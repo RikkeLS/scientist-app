@@ -18,4 +18,13 @@ export default async function handler(request, response) {
         }
         return response.status(200).json(papers)
     }
+    if (request.method === 'DELETE') {
+        try {
+            const paperID = request.body;
+            await Paper.findByIdAndDelete(paperID)
+            return response.status(201).json({status:'Paper deleted'})
+        } catch (error){
+            return response.status(400).json({error:error.message})
+        }
+    }
 }

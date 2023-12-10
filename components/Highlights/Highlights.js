@@ -44,7 +44,17 @@ export default function Highlights() {
             )
             if (response.ok) {
                 setIsContentSaved(true)
-                mutate()
+                let timeout;
+                function MyTimeOut() {
+                    timeout = setTimeout(afterSavePause,1500)
+                }
+                function afterSavePause() {
+                    setContent(null)
+                    setIsContentSaved(false)
+                    mutate()
+                }
+                MyTimeOut()
+
         }
     }  
     async function handleUpdateHighlight(updatedFavChangeInfo) {
@@ -60,6 +70,20 @@ export default function Highlights() {
             mutate()
         }
     }
+    async function handleDeleteHighlight(highlightID) {
+        const response = await fetch(`/api/${currentPageOwner}/highlights`, {
+            method:'DELETE',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify(highlightID)
+        },
+        )
+        if (response.ok) {
+            mutate()
+        }
+    }
+    
 
     //----fav toggling--with fav counter-: 
     function handleToggleFav(id) {
@@ -142,9 +166,11 @@ export default function Highlights() {
             {firstHighligts ? 
             <HighlightsList 
             highlights={isFavFilter ? firstFavHighlights:firstHighligts} 
-            handleToggleFav={handleToggleFav} favInfo={favInfo}/>:
+            handleToggleFav={handleToggleFav} favInfo={favInfo} handleDeleteHighlight={handleDeleteHighlight}/>:
              <HighlightsList highlights={ isFavFilter ? favHighlightsSorted : highlightsSorted} 
-             handleToggleFav={handleToggleFav} favInfo={favInfo}/>
+             handleToggleFav={handleToggleFav} favInfo={favInfo}
+             handleDeleteHighlight={handleDeleteHighlight}
+             />
             }
             </>
             :<p > No highlights added for this profile</p>}

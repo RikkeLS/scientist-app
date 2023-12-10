@@ -51,12 +51,12 @@ body {
 
 button {
     text-transform: capitalize;
-    background-color: lightgrey;
+    background-color: rgb(236, 236, 236);
     border: 1px solid gray;
     padding:5px;
     padding-left: 10px;
     padding-right: 10px;
-    border-radius: 10px;
+    border-radius: 3px;
     margin: 5px;
 }
 textarea {

@@ -19,11 +19,32 @@ export default async function handler(request, response) {
     if (request.method === 'POST') {
         try {
             const entry = request.body;
-
             //-- add userID to entry:
             entry['userID']=userID
             await ProfileEntry.create(entry)
             return response.status(201).json({status:'Profile entry created'})
+        } catch (error){
+            return response.status(400).json({error:error.message})
+        }
+    }
+    if (request.method === 'DELETE') {
+        try {
+            const entryID = request.body;
+            const entryToDelete = await ProfileEntry.findById(entryID)
+            const entriesToUpdate = await ProfileEntry.find({'userID': { $eq: userID }})
+            const rowNumbersAndIDsUpdated = entriesToUpdate.map( entry => (
+                entry.rowNumber <= entryToDelete.rowNumber ?
+                {rowNumber:entry.rowNumber,_id:entry._id}
+                :
+                {rowNumber:entry.rowNumber-1,_id:entry._id}
+            ));
+            for (const i in rowNumbersAndIDsUpdated) {
+                await ProfileEntry.findByIdAndUpdate(rowNumbersAndIDsUpdated[i]._id,{
+                    $set: {rowNumber:rowNumbersAndIDsUpdated[i].rowNumber}
+                })
+             }
+            await ProfileEntry.findByIdAndDelete(entryID)
+            return response.status(201).json({status:'Profile entry deleted'})
         } catch (error){
             return response.status(400).json({error:error.message})
         }
@@ -33,7 +54,7 @@ export default async function handler(request, response) {
             const newRowInfo = request.body;
             const entryToUpdate = await ProfileEntry.findById(newRowInfo.entryID)
             const entryToSwitchWith = await ProfileEntry.findOne({
-                rowNumber:entryToUpdate.rowNumber+newRowInfo.rowChange})
+                rowNumber:entryToUpdate.rowNumber+newRowInfo.rowChange,userID:userID})
                 
             await ProfileEntry.findByIdAndUpdate(newRowInfo.entryID,{
                 $set: {rowNumber:entryToUpdate.rowNumber+newRowInfo.rowChange}
