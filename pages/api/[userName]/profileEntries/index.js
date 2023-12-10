@@ -28,4 +28,22 @@ export default async function handler(request, response) {
             return response.status(400).json({error:error.message})
         }
     }
+    if (request.method==='PATCH') {
+        try {
+            const newRowInfo = request.body;
+            const entryToUpdate = await ProfileEntry.findById(newRowInfo.entryID)
+            const entryToSwitchWith = await ProfileEntry.findOne({
+                rowNumber:entryToUpdate.rowNumber+newRowInfo.rowChange})
+                
+            await ProfileEntry.findByIdAndUpdate(newRowInfo.entryID,{
+                $set: {rowNumber:entryToUpdate.rowNumber+newRowInfo.rowChange}
+            })
+            await ProfileEntry.findByIdAndUpdate(entryToSwitchWith._id,{
+                $set: {rowNumber:entryToUpdate.rowNumber}
+            })
+            return response.status(201).json({status:'Highlight favCount updated'})
+        } catch (error){
+            return response.status(400).json({error:error.message})
+        }
+    }
 }

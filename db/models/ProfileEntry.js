@@ -4,6 +4,7 @@ const profileEntrySchema = new Schema({
     template:{type:String},
     title:{type:String,required:true},
     mainText:{type:String},
+    rowNumber:{type:Number},
     userID:{type:Schema.Types.ObjectId,required:true,ref: "User"},
 }, {
         timestamps:true,

@@ -1,9 +1,10 @@
-import { useSession } from "next-auth/react"
-import { useRouter } from "next/router";
 import PapersField from "../../components/PapersField/PapersField";
 import ProfileContentForm from "../../components/ProfileContentForm/ProfileContentForm";
-import { useState } from "react";
+import { GridLayout,PapersFieldPlacement, ProfileImagePlacement,ContentPlacement,GridEntry } from "../../components/GridSettings/GridSettings"
 import ShowEntryData from "../../components/ShowEntryData/ShowEntryData";
+import { useState } from "react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 import Image from "next/image"
 import useSWR from "swr"
 
@@ -23,6 +24,8 @@ export default function MainProfile() {
         setEntry(entryData)
     }
     async function handleSaveProfileContent() {
+        //place new entries last:
+        entry['rowNumber']=entries?.length+1;
         const response = await fetch(`/api/${currentPageOwner}/profileEntries`,{
             method:'POST',
             headers:{
@@ -44,31 +47,74 @@ export default function MainProfile() {
             MyTimeOut()
         }
     }
+    async function handleChangePosition (entryID,direction) {
+        // const entryToMove = entries.find(entry => entry._id===entryID)
+        // console.log('entryToMove',entryToMove);
+        let rowChange
+        if (direction==='up') rowChange= -1;
+        if (direction==='down') rowChange= 1;
+        const response = await fetch(`/api/${currentPageOwner}/profileEntries`, {
+            method:'PATCH',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({rowChange:rowChange,entryID:entryID})
+        },
+        )
+        if (response.ok) {
+            mutateEntries()
+        }
+    }
     
     return (
         <> {
             session?.user.name===currentPageOwner ? <h1> Your main profile page </h1> : <h1>Main profile page for {currentPageOwner}</h1> 
         }
-        <Image
-                src={userInfo.profileImageURL}
-                alt="profile image"
-                width={100}
-                height={100}
-                />
+        
         {session?.user.name===currentPageOwner &&
         <ProfileContentForm getProfileContent={getProfileContent} papers={papers}/> }
         {entry && 
         <ShowEntryData entry={entry}
             handleSaveProfileContent={handleSaveProfileContent}
             isSaved={isContentSaved} />}
+       
+       
+        <GridLayout>
+        <ContentPlacement>
         { entries &&
-            entries.map(entry=>
-            <ShowEntryData key={entry._id} entry={entry}
-            handleSaveProfileContent={handleSaveProfileContent}/>
+            entries.map((entry)=>
+            <>
+            <GridEntry 
+             key={entry.rowNumber}
+             $rownumber={entry.rowNumber}
+             $columnspan={2}
+             >
+            <ShowEntryData key={entry._id} 
+            entry={entry}
+            handleChangePosition={handleChangePosition} 
+            numberOfEntries={entries.length}   
+            />
+            </GridEntry>
+            </>
             )
         }
+        </ContentPlacement>
+        <ProfileImagePlacement>
+             <Image
+                src={userInfo.profileImageURL}
+                alt="profile image"
+                width={100}
+                height={100}
+                />
+        </ProfileImagePlacement>
 
-            <PapersField papers={papers} isLoadingPapers={isLoadingPapers} errorPapers={errorPapers}/>
+
+        
+        <PapersFieldPlacement>
+        <PapersField papers={papers} isLoadingPapers={isLoadingPapers} errorPapers={errorPapers}/>
+        </PapersFieldPlacement>
+        </GridLayout>
+        
         </>
     )
 }

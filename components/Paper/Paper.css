@@ -3,7 +3,7 @@
     display: flex;
     flex-wrap:wrap;
     gap: 30px;
-    width: var(--window-width);
+    width: var(--width-window);
     justify-content: center;
 }
 .papersTitle {
@@ -15,7 +15,7 @@
     display: flex;
     flex-wrap:wrap;
     gap: 30px;
-    width: var(--window-width);
+    width: var(--width-window);
     justify-content: center;
 }
 
