@@ -3,7 +3,6 @@ import Image from 'next/image';
 
 export default function CreateProfileForm({onCreateNewUser}) {
     const {data:session} = useSession();    
-    
 
     function handleSubmit(event) {
         event.preventDefault()

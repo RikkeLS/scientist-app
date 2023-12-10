@@ -8,40 +8,43 @@ import Image from "next/image"
 import useSWR from "swr"
 
 export default function MainProfile() {
-    const [papers,setPapers] = useState();
     const {data:session} = useSession();
     const router = useRouter();
     const currentPageOwner = router.query.userName;
     const [entry, setEntry] = useState();
     const [isContentSaved,setIsContentSaved] = useState(false);
-    const {data:userInfo,isLoading,error} = useSWR(`api/${currentPageOwner}/userInfo`)
-    if (isLoading || error) return <h2>Loading...</h2>;
-    // const {mutate} = useSWR(`/api/${currentPageOwner}/profileEntries`)
+    const { data:papers, isLoading:isLoadingPapers, error:errorPapers } = useSWR(`/api/${currentPageOwner}/papers`)
+    const {data:userInfo,isLoading:isLoadingUserInfo,error:errorUserInfo} = useSWR(`/api/${currentPageOwner}/userInfo`)
+    const {data:entries,isLoading:isLoadingEntries,error:errorEntries,mutate:mutateEntries} = useSWR(`/api/${currentPageOwner}/profileEntries`)
+    if (isLoadingUserInfo || errorUserInfo) return <h2>Loading...</h2>;
+    if (isLoadingEntries || errorEntries) return <h2>Loading...</h2>;
 
    function getProfileContent(entryData) {
         setEntry(entryData)
     }
     async function handleSaveProfileContent() {
-        console.log('..saving to db..');
-        const response = fetch(`/api/${currentPageOwner}/profileEntries`,{
+        const response = await fetch(`/api/${currentPageOwner}/profileEntries`,{
             method:'POST',
             headers:{
                 'Content-Type':'application/json'
             },
             body:JSON.stringify(entry)
-        },
-        )
+        },)
         if (response.ok) {
             setIsContentSaved(true)
-            // console.log('content is saved:',isContentSaved)
-            // console.log('response status:',response.status);
-            // mutate()
+            let timeout;
+            function MyTimeOut() {
+                timeout = setTimeout(afterSavePause,1500)
+            }
+            function afterSavePause() {
+                setEntry(null)
+                setIsContentSaved(false)
+                mutateEntries()
+            }
+            MyTimeOut()
         }
     }
-    function getPapers(papersFromComponent) {
-        setPapers(papersFromComponent)
-    }
-
+    
     return (
         <> {
             session?.user.name===currentPageOwner ? <h1> Your main profile page </h1> : <h1>Main profile page for {currentPageOwner}</h1> 
@@ -52,12 +55,20 @@ export default function MainProfile() {
                 width={100}
                 height={100}
                 />
-            {session?.user.name===currentPageOwner &&
-            <ProfileContentForm getProfileContent={getProfileContent} papers={papers}/> }
-            {entry ? <ShowEntryData entry={entry} handleSaveProfileContent={handleSaveProfileContent} isSaved={isContentSaved} />:''}
-            <PapersField getPapers={getPapers} userName={currentPageOwner}/>
+        {session?.user.name===currentPageOwner &&
+        <ProfileContentForm getProfileContent={getProfileContent} papers={papers}/> }
+        {entry && 
+        <ShowEntryData entry={entry}
+            handleSaveProfileContent={handleSaveProfileContent}
+            isSaved={isContentSaved} />}
+        { entries &&
+            entries.map(entry=>
+            <ShowEntryData key={entry._id} entry={entry}
+            handleSaveProfileContent={handleSaveProfileContent}/>
+            )
+        }
+
+            <PapersField papers={papers} isLoadingPapers={isLoadingPapers} errorPapers={errorPapers}/>
         </>
     )
-    
-
 }

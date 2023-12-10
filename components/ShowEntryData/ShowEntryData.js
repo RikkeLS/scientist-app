@@ -9,18 +9,7 @@ export default function ShowEntryData({entry,handleSaveProfileContent,isSaved}) 
     }
     return (
         <>
-        
-        {!isSaved ?
-        <section className='showContentField'>
-            <h2 className='ContentField_title'>{entry.title}:</h2>
-            {formattedEntryText ? <p className='ContentField_mainText'>{formattedEntryText}</p>
-            : 
-            <p className='ContentField_mainText'>{entry.mainText}</p> 
-            }
-            <SaveButton onSave={handleSaveProfileContent} isSaved={isSaved} itemSaved={'entry'}/>
-        </section> 
-                :
-        <section className='showContentField'>
+        <section className={isSaved===undefined ?`ContentField`:`ContentField toSave`}>
             <SaveButton onSave={handleSaveProfileContent} isSaved={isSaved} itemSaved={'entry'} />
             <h2 className='ContentField_title'>{entry.title}:</h2>
             {formattedEntryText ? <p className='ContentField_mainText'>{formattedEntryText}</p>
@@ -28,7 +17,8 @@ export default function ShowEntryData({entry,handleSaveProfileContent,isSaved}) 
             <p className='ContentField_mainText'>{entry.mainText}</p> 
             }
             
-        </section> }
+        </section> 
+
         </>
     )
 }
