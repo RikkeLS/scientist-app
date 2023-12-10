@@ -23,7 +23,7 @@ export default function MainProfile() {
    function getProfileContent(entryData) {
         setEntry(entryData)
     }
-    async function handleSaveProfileContent() {
+    async function handleSaveProfileEntry() {
         //place new entries last:
         entry['rowNumber']=entries?.length+1;
         const response = await fetch(`/api/${currentPageOwner}/profileEntries`,{
@@ -48,8 +48,6 @@ export default function MainProfile() {
         }
     }
     async function handleChangePosition (entryID,direction) {
-        // const entryToMove = entries.find(entry => entry._id===entryID)
-        // console.log('entryToMove',entryToMove);
         let rowChange
         if (direction==='up') rowChange= -1;
         if (direction==='down') rowChange= 1;
@@ -65,6 +63,21 @@ export default function MainProfile() {
             mutateEntries()
         }
     }
+    async function handleDeleteProfileEntry(entryID) {
+        const response = await fetch(`/api/${currentPageOwner}/profileEntries`, {
+            method:'DELETE',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify(entryID)
+        },
+        )
+        if (response.ok) {
+            mutateEntries()
+            console.log('entries',entries);
+        }
+
+    }
     
     return (
         <> {
@@ -75,10 +88,8 @@ export default function MainProfile() {
         <ProfileContentForm getProfileContent={getProfileContent} papers={papers}/> }
         {entry && 
         <ShowEntryData entry={entry}
-            handleSaveProfileContent={handleSaveProfileContent}
+            handleSaveProfileEntry={handleSaveProfileEntry}
             isSaved={isContentSaved} />}
-       
-       
         <GridLayout>
         <ContentPlacement>
         { entries &&
@@ -92,11 +103,11 @@ export default function MainProfile() {
             <ShowEntryData key={entry._id} 
             entry={entry}
             handleChangePosition={handleChangePosition} 
+            handleDeleteProfileEntry={handleDeleteProfileEntry}
             numberOfEntries={entries.length}   
             />
             </GridEntry>
-            </>
-            )
+            </>)
         }
         </ContentPlacement>
         <ProfileImagePlacement>
@@ -107,9 +118,6 @@ export default function MainProfile() {
                 height={100}
                 />
         </ProfileImagePlacement>
-
-
-        
         <PapersFieldPlacement>
         <PapersField papers={papers} isLoadingPapers={isLoadingPapers} errorPapers={errorPapers}/>
         </PapersFieldPlacement>
