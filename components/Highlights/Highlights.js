@@ -65,8 +65,6 @@ export default function Highlights() {
     function handleToggleFav(id) {
         const infoForID = favInfo?.find(info => info.highlightID === id)
         let favChange = 1;
-
-        // setFavChange({highlightID:id,favChange:favChange})
         if (infoForID) {
             
             if (infoForID.isFav===true) {
@@ -114,8 +112,6 @@ export default function Highlights() {
 
     //--filter by fav:
     const favedIDs = favInfo?.map(info => info.isFav && info.highlightID)
-
-    
     const favHighlightsSorted = highlightsSorted.filter(highlight =>
         favedIDs && favedIDs?.includes(highlight._id) )
     const firstFavHighlights = firstHighligts?.filter(highlight =>

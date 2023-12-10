@@ -2,27 +2,31 @@ import useSWR from "swr";
 import Link from "next/link";
 
 
-export default  function PapersField ({userName,getPapers}) {
-    const { data:papers, isLoading, error } = useSWR(`/api/${userName}/papers`)
+export default  function PapersField ({papers,isLoadingPapers,errorPapers}) {
+    // const { data:papers, isLoading, error } = useSWR(`/api/${userName}/papers`)
 
-    if (isLoading) return (
+    if (isLoadingPapers) return (
         <> 
-        <h2 className="papersTitle" >Papers</h2>
+        <h2 className="papersTitle" >Papers on arXiv:</h2>
         <h4>Loading papers ...</h4>
         </>  
     )
-    if (error) return (
+    if (errorPapers) return (
         <> 
-        <h2 className="papersTitle" >Papers</h2>
-        <h4>Error! {error.message}</h4>
+        <h2 className="papersTitle" >Papers on arXiv:</h2>
+        <h4>Error! {errorPapers.message}</h4>
         </> 
     )
-    getPapers(papers)
-
-    return (
-    <>
+    if (!papers) return (
+        <> 
         <h2 className="papersTitle" >Papers on arXiv:</h2>
-     <ul className='paperOverviewList'>
+        <h4>This profile has not selected any papers yet</h4>
+        </> 
+    )
+    return (
+        <>
+        <h2 className="papersTitle" >Papers on arXiv:</h2>
+        <ul className='paperOverviewList'>
         {
             papers.map(paper => 
         <li key={paper.id}> 
@@ -35,7 +39,7 @@ export default  function PapersField ({userName,getPapers}) {
         )
         }
      </ul>
-    </>
+     </>
 
     )
             

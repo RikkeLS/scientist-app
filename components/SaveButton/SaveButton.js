@@ -1,5 +1,5 @@
 export default function SaveButton({onSave,isSaved,itemSaved}) {
-
+    if (isSaved===undefined) return ('');
     // console.log('isSaved in button:',isSaved);
     return (
         <span role="button" className={isSaved ? "saveButton saved" : "saveButton"}

@@ -1,16 +1,6 @@
-.showContentField {
-    border:2px dashed var(--color-hgamma);
-    background-color: var(--color-hgamma-tp);
-}
-.ContentField {
-    border:2px solid var(--color-hgamma);
-    background-color: var(--color-hgamma-tp);
-}
+.createdProfileInfo {
 
-.ContentField_title {
-    
 }
-
-.ContentField_mainText {
+.createdProfileInfo-title {
 
 }

@@ -6,6 +6,7 @@
 @import './components/HighlightForm/HighlightForm.css';
 @import './components/ShowHighlight/ShowHighlight.css';
 @import './components/Paper/Paper.css';
+@import './components/ShowEntryData/ShowEntryData.css';
 
 :root {
     --color-std-text: black;
