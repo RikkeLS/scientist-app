@@ -9,6 +9,7 @@ const StyledDeleteButton = styled.span`
 `
 
 export default function DeleteButton ({handleDelete,ID}) {
+    if (ID===undefined) return ''
     return (
         <StyledDeleteButton onClick={()=>handleDelete(ID)}>x</StyledDeleteButton>
         )

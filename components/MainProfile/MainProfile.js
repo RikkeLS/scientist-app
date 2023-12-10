@@ -74,7 +74,6 @@ export default function MainProfile() {
         )
         if (response.ok) {
             mutateEntries()
-            console.log('entries',entries);
         }
 
     }

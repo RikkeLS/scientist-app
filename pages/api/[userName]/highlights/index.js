@@ -43,5 +43,15 @@ export default async function handler(request, response) {
             return response.status(400).json({error:error.message})
         }
     }
+    if (request.method === 'DELETE') {
+        try {
+            const highlightID = request.body;
+            console.log('id',highlightID);
+            await Highlight.findByIdAndDelete(highlightID)
+            return response.status(201).json({status:'Highlight deleted'})
+        } catch (error){
+            return response.status(400).json({error:error.message})
+        }
+    }
     
 }

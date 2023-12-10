@@ -1,9 +1,12 @@
 import Link from "next/link";
 import FavButton from "../FavButton/FavButton";
-export default function ShowHighlight({content,favInfo,handleToggleFav}) {
+import DeleteButton from "../DeleteButton/DeleteButton";
+
+export default function ShowHighlight({content,favInfo,handleToggleFav,handleDeleteHighlight}) {
     return (
         <>
             <section className="highlight_titleContainer">
+            <DeleteButton handleDelete={handleDeleteHighlight} ID={content._id}/> 
             <FavButton  content={content} favInfo={favInfo} handleToggleFav={handleToggleFav} />
                 <h3 className="highlight_title">{content.title}</h3>
                 <Link className="highlight_refLink" href={content.refLink} rel='noopener noreferrer' target='_blank'>{content.refText}  </Link>
