@@ -8,6 +8,8 @@
 @import './components/ShowEntryData/ShowEntryData.css';
 @import './components/CreateProfileForm/CreateProfileForm.css';
 @import './components/FilterSetting/FilterSetting.css';
+@import './components/PapersField/PapersField.css';
+
 
 :root {
     --color-std-text: black;
