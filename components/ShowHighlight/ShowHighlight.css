@@ -11,11 +11,6 @@
     
     text-align: center;
     height: var(--height-highlight);
-    /* display: flex; */
-    /* flex-direction: column; */
-    /* justify-content: center; */
-    /* align-items: center; */
-    /* text-align: center; */
     width: 300px;
     font-size: 1vw;
     border: 1px solid black;
@@ -49,28 +44,17 @@
 
 /* fav button */
 .highlight_favIcon {
-    /* background-color: azure; */
-    width: var(--width-favIcon);
-    /* position: relative; */
-    /* right: 100px; */
-    /* width: 100px; */
     fill:white;
-    /* fill:"#ff0000"; */
 }
 .highlight_favIcon:hover {
     fill:var(--color-hdelta-tp);
 }
 .highlight_favIconContainer {
-    width: var(--width-favIcon);
     position: relative; 
-    left: 170px;
+    left: 140px;
     bottom: 25px;
 }
 .highlight_favIcon.isFav {
-    /* background-color: azure; */
-    width: var(--width-favIcon);
     fill:var(--color-hdelta);
-
-    /* fill:"#ff0000"; */
 }
 

@@ -19,16 +19,16 @@ const StyledButtonType = styled.button`
     border-radius: 3px;
     margin: 10px;
     max-height: 30px;
-    max-width: 100px;
+    max-width: 120px;
     align-self: center;
 
     &:hover {
         border: 1px solid var(--color-${({$borderColor}) =>($borderColor)} );
-        background-color:var(--color-${({$bgcolor}) =>($bgcolor)} );
+        /* background-color:var(--color-${({$bgcolor}) =>($bgcolor)} ); */
     }
 `
-export default function StyledButton({children}) {
+export default function StyledButton({children,onClick}) {
     return (
-        <StyledButtonType $borderColor={randomColor()}>{children}</StyledButtonType>
+        <StyledButtonType onClick={onClick} $borderColor={randomColor()}>{children}</StyledButtonType>
     )
 }

@@ -1,0 +1,33 @@
+.filterSettingContainter{
+    display: flex;
+    gap:15px;
+    margin: 10px;
+    align-items: center;
+    padding: 20px;
+}
+
+.highlight_favIconContainerForFilter {
+}
+.highlight_favIconForFilter {
+    fill:var(--color-hdelta);
+}
+.highlight_favIconForFilter:hover {
+    fill:var(--color-hdelta-tp);
+}
+
+.filterSetterAll {
+    border-bottom: 2px solid white;
+    padding-bottom: 5px;
+    position: relative;
+    top: 4px;
+}
+.filterSelectedAll {
+    border-bottom: 2px solid var(--color-hdelta);
+    /* border-top: 2px solid var(--color-hdelta); */
+    /* position: relative;s */
+    /* bottom: 2px; */
+ }
+
+.filterSelected {
+   border-bottom: 2px solid var(--color-hdelta);
+}
