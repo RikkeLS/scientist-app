@@ -9,9 +9,19 @@
 .papersTitle {
 
 }
+/* in Papers: */
+.papersList {
+    list-style: none;
+}
+
+.papersSelectionButtonList {
+    display: flex;
+    gap: 10px;
+    list-style: none;
+}
 
 /* in SelectPapers: */
-.papersSelectionList {
+.papersSelectionList, .papersList {
     display: flex;
     flex-wrap:wrap;
     gap: 30px;
@@ -36,14 +46,40 @@
     text-align: center;
     font-size: 0.5em;
 }
-
+.paper_authorsList {
+    display: flex;
+    font-size: 0.5em;
+    flex-wrap: wrap;
+    text-align: center;
+    align-self: center;
+    margin: 0;
+    padding: 0;
+    line-height: 1px;
+}
 .paper_abstract {
     font-size: xx-small;
     text-align: center;
 }
 
-.paper_authorsList {
+
+.paper_links {
     display: flex;
-    font-size: small;
-    flex-wrap: wrap;
+    /* position: absolute; */
+    position: relative;
+    top: 10px;
+    left: 100px;
+}
+.paper_link {
+    font-size: 0.7em;
+}
+.paper_link:hover {
+    color: var(h);
+    border-bottom: 1px solid var(--color-hgamma);
+}
+.paper_published,.paper_updated {
+    font-size: 0.5em;
+    margin: 0;
+    /* position: absolute; */
+    position: relative;
+    right: 5px;
 }

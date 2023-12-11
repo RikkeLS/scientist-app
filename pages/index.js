@@ -4,31 +4,32 @@ export default function Home() {
 
   return (
     <>
-      <h1>Home Page</h1>
+    <section className="homePageContainer">
+      <h1 className="homePage-title">Physicists App</h1>
       <nav className="mainNavbar">
       <ul>
-        <li>
+      <li>
+        <Link href={'/create-profile'} className="createProfile-title">Create profile</Link>
+        </li>
+        {/* <li>
         <Link href={'/papers'}>Link to Publications/papers</Link>
-        </li>
-        <li>
-        <Link href={'/create-profile'}>Link to create profile</Link>
-        
-        </li>
-        <li>
+        </li> */}
+        {/* <li>
         <Link href={'/login'}>Link to login page</Link>
-        </li>
+        </li> */}
       </ul>
-      <h2>Registered user profiles:</h2>
+      <h2 className="regUsers-title">Registered users</h2>
       <ul>
         <li>
-        <Link href={'/RikkeLS'}>Link to RikkeLS</Link>
+        <Link className="regUser-ListItem" href={'/RikkeLS'}>RikkeLS</Link>
         </li>
         <li>
-        <Link href={'/RikkeTesting'}>Test profile</Link>
+        <Link className="regUser-ListItem" href={'/RikkeTesting'}>Test profile</Link>
         </li>
       </ul>
 
       </nav>
+      </section>
     </>
   );
 }
