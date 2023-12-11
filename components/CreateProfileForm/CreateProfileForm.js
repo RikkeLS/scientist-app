@@ -1,5 +1,6 @@
 import {useSession} from 'next-auth/react'
 import Image from 'next/image';
+import StyledButton from '../StyledButton/StyledButton'
 
 export default function CreateProfileForm({onCreateNewUser}) {
     const {data:session} = useSession();    
@@ -21,18 +22,18 @@ export default function CreateProfileForm({onCreateNewUser}) {
 
     return (
         <>
-        <form onSubmit={handleSubmit}>
+        <form className='form createUser-form' onSubmit={handleSubmit}>
             <label htmlFor='fullName'>Full name displayed on site:</label>
             <input id='fullName' name={'fullName'} />
             <label htmlFor='isProviderPic'> You want to use your Github profile picture?</label>
             <input type='checkbox' defaultChecked id='isProviderPic' name='isProviderPic' />
-            <Image 
+            <div className='profileImageContainer'><Image className='profileImage'
             src={session.user.image} 
             alt='suggested profile picture'
             width={100}
             height={100}
-            />
-            <button type='submit'>Create Profile</button>
+            /></div>
+            <StyledButton type='submit'>Create Profile</StyledButton>
         </form>
         </>
 

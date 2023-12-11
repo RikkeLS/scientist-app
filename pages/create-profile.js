@@ -5,9 +5,11 @@ import Link from "next/link"
 export default function CreateProfilePage () {
     return (
         <>
+        <section className="createProfileContainer">
         <CreateProfile/>
-        <LoginButton/>
-        <Link href={'/'}>go to homepage</Link>
+        {/* <LoginButton/> */}
+        </section>
+        <Link href={'/'}>Go to homepage</Link>
         </>
     )
 };

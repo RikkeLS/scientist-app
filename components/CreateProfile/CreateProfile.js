@@ -14,7 +14,7 @@ export default function CreateProfile () {
     if (!session) {
         return (
             <>
-            <h1>Login to create a profile</h1>
+            <h2>Login to create a profile</h2>
             <LoginButton/>
             </>)
     }
@@ -39,7 +39,7 @@ export default function CreateProfile () {
 
     return (
         <>
-        <h1> Create a profile with username {userName} (Github username):</h1>
+        <h2> Create a profile with username {userName} (Github username):</h2>
         
         {!newUserInfo ? (
             <CreateProfileForm onCreateNewUser={handleCreateNewUser} />)
