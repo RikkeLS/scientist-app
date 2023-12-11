@@ -16,6 +16,7 @@ const StyledArrow = styled.button`
 `
 const StyledArrowSection = styled.section`
     display: flex;
+    gap:5px;
 `
 
 export default function ArrowsToChangePosition ({handleChangePosition,entryID,numberOfEntries,rowNumber}) {

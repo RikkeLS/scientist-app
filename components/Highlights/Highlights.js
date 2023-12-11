@@ -9,6 +9,7 @@ import useLocalStorageState from "use-local-storage-state";
 import SortingSetting from "../SortingSetting/SortingSetting";
 import FilterSetting from "../FilterSetting/FilterSetting";
 import HighlightsList from "../HighlightsList/HighlightsList";
+import StyledButton from "../StyledButton/StyledButton";
 
 export default function Highlights() {
     const [content, setContent] = useState();
@@ -149,7 +150,7 @@ export default function Highlights() {
         <h2>Scientific results</h2>
         {session?.user.name===currentPageOwner && 
         <>
-            <button onClick={()=>setIsAddHighlight( !isAddHighlight )} >{!isAddHighlight ? 'Add entry': 'Hide entry form'}</button>
+            <StyledButton onClick={()=>setIsAddHighlight( !isAddHighlight )} >{!isAddHighlight ? 'Add entry': 'Hide entry form'}</StyledButton>
             {isAddHighlight &&  <HighlightForm getHighlightContent={getHighlightContent}/> }
             
         </>

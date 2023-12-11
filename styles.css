@@ -7,7 +7,7 @@
 @import './components/Paper/Paper.css';
 @import './components/ShowEntryData/ShowEntryData.css';
 @import './components/CreateProfileForm/CreateProfileForm.css';
-
+@import './components/FilterSetting/FilterSetting.css';
 
 :root {
     --color-std-text: black;
