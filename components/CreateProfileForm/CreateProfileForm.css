@@ -1,0 +1,12 @@
+.createUser-form {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    width: 200px;
+}
+
+
+/* moved to styles.css*/
+/* .profileImage {
+
+} */

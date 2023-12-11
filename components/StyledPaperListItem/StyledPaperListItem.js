@@ -6,7 +6,10 @@ function randomColor() {
 }
 
 const StyledPaperBorder = styled.li`
+    display: flex;
+    flex-direction: column;
     width: ${({$width}) =>($width)};
+    min-height: ${({$width}) =>($width*1.4)} ;
     /* height: ${({$width}) =>($width*2)}; */
     border: 1px solid rgba(88, 88, 88, 0.926);
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;

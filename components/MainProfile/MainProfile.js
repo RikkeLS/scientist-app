@@ -110,7 +110,7 @@ export default function MainProfile() {
         }
         </ContentPlacement>
         <ProfileImagePlacement>
-             <Image
+             <Image className="profileImage"
                 src={userInfo.profileImageURL}
                 alt="profile image"
                 width={100}
