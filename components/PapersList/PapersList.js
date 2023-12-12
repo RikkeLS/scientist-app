@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import Paper from '../Paper/Paper';
 import SaveButton from '../SaveButton/SaveButton';
 import SelectAllButton from '../SelectAllButton/SelectAllButton';
+import StyledButton from '../StyledButton/StyledButton';
 
 console.clear();
 export default function PapersList ({authorToFetch,handleNewSearch,addSelectedPapers,isPaperSaved}) {
@@ -78,10 +79,11 @@ export default function PapersList ({authorToFetch,handleNewSearch,addSelectedPa
 
     return (
         <> 
-        <h3>Papers on arXiv from search <em>author: {authorName}</em> </h3>
+        <h3 className='papersList-title'>Papers on arXiv from search <em>author: {authorName}</em> </h3>
         <ul className='papersSelectionButtonList'>
         <li>
-        <button className='NewSearchButton' onClick={()=> handleNewSearch()}>New search</button>
+        {/* <button className='NewSearchButton' onClick={()=> handleNewSearch()}>New search</button> */}
+        <StyledButton onClick={()=> handleNewSearch()}>New search</StyledButton>
         </li><li>
         <SelectAllButton action='select' onClick={()=>handleSelectAllPapers()}>Select all papers</SelectAllButton>
         </li><li>

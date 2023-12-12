@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import Paper from '../Paper/Paper';
 import SaveButton from '../SaveButton/SaveButton';
 import SelectAllButton from '../SelectAllButton/SelectAllButton';
+import StyledButton from '../StyledButton/StyledButton';
 
 export default function SelectPapers ({authorToFetch,handleNewSearch,addSelectedPapers,isPaperSaved,isAddPapers}) {
     //--- arXiv-api Wrapper:
@@ -78,10 +79,10 @@ export default function SelectPapers ({authorToFetch,handleNewSearch,addSelected
 
     return (
         <> 
-        <h3>Papers on arXiv from search <em>author: {authorName}</em> </h3>
+        <h3 className='papersList-title'>Papers on arXiv from search <em>author: {authorName}</em> </h3>
         <ul className='papersSelectionButtonList'>
         <li>
-        <button className='NewSearchButton' onClick={()=> handleNewSearch()}>New search</button>
+        <StyledButton onClick={()=> handleNewSearch()}>New search</StyledButton>
         </li><li>
         <SelectAllButton action='select' onClick={()=>handleSelectAllPapers()}>Select all papers</SelectAllButton>
         </li><li>

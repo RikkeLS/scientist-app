@@ -24,8 +24,8 @@ export default function SelectButton({isSelectedInfo,paperID,handleSelectPaperTo
     <Image className="SelectButtonImage" onClick={()=>handleSelectPaperToggle(paperID)} 
     src={paperInfo?.isSelected ? '/ticked.svg':'/cross.svg'}
     alt={paperInfo?.isSelected ? 'Deselect paper':'Select paper'}
-    width={20}
-    height={20}
+    width={30}
+    height={30}
     />
     {/* /* <button onClick={()=>handleSelectPaperToggle(paperID)}>{paperInfo?.isSelected ? 'Deselect paper':'Select paper'}</button>
    {paperInfo?.isSelected ? <p>paper selected to go in database</p> : <p>paper is not going in the database</p>} */}
