@@ -1,3 +1,5 @@
+import StyledButton from "../StyledButton/StyledButton"
+
 export default function PaperSearchQuery ({onSearch}) {
 
     function handleSubmit(event) {
@@ -9,10 +11,10 @@ export default function PaperSearchQuery ({onSearch}) {
     }
 
     return (
-        <form onSubmit={handleSubmit} >
-            <label htmlFor="author">Author</label>
+        <form className="paperSearchForm" onSubmit={handleSubmit} >
+            <label htmlFor="author">Author:</label>
             <input id='author' name='author'></input>
-            <button type="submit">Search by author</button>
+            <StyledButton type="submit">Search by author</StyledButton>
         </form>
     )
 }

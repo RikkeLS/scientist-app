@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import Paper from '../Paper/Paper';
 import SaveButton from '../SaveButton/SaveButton';
+import SavePaperButton from '../SavePaperButton/SavePaperButton';
 import SelectAllButton from '../SelectAllButton/SelectAllButton';
 import StyledButton from '../StyledButton/StyledButton';
 
@@ -72,7 +73,7 @@ export default function SelectPapers ({authorToFetch,handleNewSearch,addSelected
         console.log('error',error.message);
     return <div>Error: {error.message}</div>;
     }
-    
+    // console.log('isPaperSaved',isPaperSaved);
     if (!papers) return (<h1>data not available</h1>)
 
     const numberOfSelectedPapers = isSelectedInfo?.filter(info => info.isSelected).length
@@ -88,8 +89,8 @@ export default function SelectPapers ({authorToFetch,handleNewSearch,addSelected
         </li><li>
         <SelectAllButton action='deselect' onClick={()=>handleDeSelectAllPapers()}>Deselect all papers</SelectAllButton>
         </li><li>
-        {numberOfSelectedPapers===0 ? <p>Select papers to save to the profile</p> : 
-        <SaveButton onSave={()=>addSelectedPapers(papers,isSelectedInfo)} isSaved={isPaperSaved} itemSaved={numberOfSelectedPapers===1 ?  'paper':`${numberOfSelectedPapers} papers`}/>
+        {numberOfSelectedPapers===0 ? <p className='selectPapersInfoText'>Select papers to save to the profile</p> : 
+        <SavePaperButton onSave={()=>addSelectedPapers(papers,isSelectedInfo)} isSaved={isPaperSaved} itemSaved={numberOfSelectedPapers===1 ?  'paper':`${numberOfSelectedPapers} papers`}/>
         }
         </li>
         </ul>

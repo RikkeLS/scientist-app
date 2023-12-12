@@ -1,4 +1,5 @@
 @import './components/SaveButton/SaveButton.css';
+@import './components/SavePaperButton/SavePaperButton.css';
 @import './components/SelectAllButton/SelectAllButton.css';
 @import './components/SelectButton/SelectButton.css';
 @import './components/ShowCreatedProfileInfo/ShowCreatedProfileInfo.css';

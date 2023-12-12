@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import Paper from '../Paper/Paper';
 import SaveButton from '../SaveButton/SaveButton';
+import SavePaperButton from '../SavePaperButton/SavePaperButton';
 import SelectAllButton from '../SelectAllButton/SelectAllButton';
 import StyledButton from '../StyledButton/StyledButton';
 
@@ -89,14 +90,14 @@ export default function PapersList ({authorToFetch,handleNewSearch,addSelectedPa
         </li><li>
         <SelectAllButton action='deselect' onClick={()=>handleDeSelectAllPapers()}>Deselect all papers</SelectAllButton>
         </li><li>
-        {numberOfSelectedPapers===0 ? <p>Select papers to save to the profile</p> : 
-        <SaveButton onSave={()=>addSelectedPapers(papers,isSelectedInfo)} isSaved={isPaperSaved} itemSaved={numberOfSelectedPapers===1 ?  'paper':`${numberOfSelectedPapers} papers`}/>
+        {numberOfSelectedPapers===0 ? <p className='selectPapersInfoText'>Select papers to save to the profile</p> : 
+        <SavePaperButton onSave={()=>addSelectedPapers(papers,isSelectedInfo)} isSaved={isPaperSaved} itemSaved={numberOfSelectedPapers===1 ?  'paper':`${numberOfSelectedPapers} papers`}/>
         }
         </li>
         </ul>
                 <ul className='papersList'>
                 {papers?.map( paper =>
-                    <Paper key={paper.id} paper={paper} handleSelectPaperToggle={handleSelectPaperToggle} isSelectedInfo={isSelectedInfo} />
+                    <Paper key={paper._id} paper={paper} handleSelectPaperToggle={handleSelectPaperToggle} isSelectedInfo={isSelectedInfo} />
                 )}
                     
                 </ul>

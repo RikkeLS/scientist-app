@@ -6,29 +6,13 @@ export default function SelectButton({isSelectedInfo,paperID,handleSelectPaperTo
 
     return (
     <>
-    {/* (paperInfo?.isSelected ?
-       ( <Image className="SelectButtonImage" onClick={()=>handleSelectPaperToggle(paperID)} 
-    src={'/ticked.svg'}
-    alt={'Selected paper'}
-    width={20}
-    height={20}
-    /> )
-    :
-        (<Image className="SelectButtonImage" onClick={()=>handleSelectPaperToggle(paperID)} 
-    src={'/cross.svg'}
-    alt={'Deselected paper'}
-    width={20}
-    height={20}
-    />)
-    ) */}
+
     <Image className="SelectButtonImage" onClick={()=>handleSelectPaperToggle(paperID)} 
     src={paperInfo?.isSelected ? '/ticked.svg':'/cross.svg'}
     alt={paperInfo?.isSelected ? 'Deselect paper':'Select paper'}
     width={30}
     height={30}
     />
-    {/* /* <button onClick={()=>handleSelectPaperToggle(paperID)}>{paperInfo?.isSelected ? 'Deselect paper':'Select paper'}</button>
-   {paperInfo?.isSelected ? <p>paper selected to go in database</p> : <p>paper is not going in the database</p>} */}
 
     </>
     )

@@ -19,11 +19,19 @@
     gap: 10px;
     list-style: none;
 }
+
+.selectPapersInfoText {
+    
+}
+
+/* in PaperSearchQuery */
+.paperSearchForm {
+    margin-left: 80px;
+}
+/* in SelectPapers: */
 .papersList-title {
     margin-left: 30px;
 }
-
-/* in SelectPapers: */
 .papersSelectionList, .papersList {
     display: flex;
     flex-wrap:wrap;
