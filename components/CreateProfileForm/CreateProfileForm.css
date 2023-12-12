@@ -2,10 +2,22 @@
     display: flex;
     flex-direction: column;
     align-self: center;
-    width: 200px;
+    width: 300px;
+    gap:20px;
+}
+.createProfileImageContainer {
+    align-self: center;
+}
+.createProfileButtonContainer {
+
+    align-self: center;
+    position: relative;
+    right: 10px; 
 }
 
+.checkBox {
 
+}
 /* moved to styles.css*/
 /* .profileImage {
 

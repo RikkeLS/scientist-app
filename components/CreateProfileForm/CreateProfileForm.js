@@ -22,18 +22,22 @@ export default function CreateProfileForm({onCreateNewUser}) {
 
     return (
         <>
-        <form className='form createUser-form' onSubmit={handleSubmit}>
+        <form className='createUser-form' onSubmit={handleSubmit}>
             <label htmlFor='fullName'>Full name displayed on site:</label>
             <input id='fullName' name={'fullName'} />
             <label htmlFor='isProviderPic'> You want to use your Github profile picture?</label>
-            <input type='checkbox' defaultChecked id='isProviderPic' name='isProviderPic' />
-            <div className='profileImageContainer'><Image className='profileImage'
+
+            <div className='createProfileImageContainer'><Image className='profileImage'
             src={session.user.image} 
             alt='suggested profile picture'
-            width={100}
-            height={100}
-            /></div>
+            width={120}
+            height={120}
+            />
+                        <input className='checkBox' type='checkbox' defaultChecked id='isProviderPic' name='isProviderPic' />
+            </div>
+            <div className='createProfileButtonContainer'>
             <StyledButton type='submit'>Create Profile</StyledButton>
+            </div>
         </form>
         </>
 
