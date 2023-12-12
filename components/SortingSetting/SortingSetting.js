@@ -9,9 +9,9 @@ export default function SortingSetting({handleSortingHighlights,sortedBy}) {
     <section className="sortingSettingSection">
     <span className="sortingSettingSection-title">Sorted by {sortedByText} </span>
     <ul className="sortByList">
-        <li onClick={()=>handleSortingHighlights('newest')} className="sortByListItem">newest</li>
-        <li onClick={()=>handleSortingHighlights('oldest')} className="sortByListItem">oldest</li>
-        <li onClick={()=>handleSortingHighlights('mostFav')} className="sortByListItem">most favourited</li>
+        <li onClick={()=>handleSortingHighlights('newest')} className="sortByListItem1">newest</li>
+        <li onClick={()=>handleSortingHighlights('oldest')} className="sortByListItem2">oldest</li>
+        <li onClick={()=>handleSortingHighlights('mostFav')} className="sortByListItem3">most favourited</li>
     </ul>
     </section>
         </>

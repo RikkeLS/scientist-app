@@ -81,9 +81,10 @@ export default function MainProfile() {
     }
     
     return (
-        <> {
+        <>
+         {/* {
             session?.user.name===currentPageOwner ? <h1> Your main profile page </h1> : <h1>Main profile page for {currentPageOwner}</h1> 
-        }
+        } */}
         {session?.user.name===currentPageOwner &&
         <StyledButton onClick={()=>setIsAddEntry( !isAddEntry )} >{!isAddEntry ? 'Add entry': 'Hide entry form'}</StyledButton>}
         {isAddEntry===true && 
@@ -113,11 +114,11 @@ export default function MainProfile() {
         }
         </ContentPlacement>
         <ProfileImagePlacement>
-             <Image className="profileImage"
+             <Image className="profileImage profileImageOnProfilePage"
                 src={userInfo.profileImageURL}
                 alt="profile image"
-                width={100}
-                height={100}
+                width={150}
+                height={150}
                 />
         </ProfileImagePlacement>
         <PapersFieldPlacement>

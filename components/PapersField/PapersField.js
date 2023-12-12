@@ -28,7 +28,7 @@ export default  function PapersField ({papers,isLoadingPapers,errorPapers}) {
         <ul className='papersField-OverviewList'>
         {
             papers.map((paper,index) => 
-        <li key={paper.id} className={`papersFieldpaper paper${index%4} ${index===0 && 'firstPaperInList'}`}> 
+        <li key={paper._id} className={`papersFieldpaper paper${index%4} ${index===0 && 'firstPaperInList'}`}> 
         <h3 >{paper.title}</h3>
         <ul className="papersField-authorsList">
         {paper.authors.map((author)=> (<li key={author} >{author}</li>))}

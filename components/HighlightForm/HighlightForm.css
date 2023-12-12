@@ -1,7 +1,10 @@
 #formHighlight {
     display: flex;
     flex-direction: column;
-    width: 300px;
+    width: 600px;
+    margin: 20px;
+    margin-left: 30px;
+    gap:10px
 }
 
 /* # */
