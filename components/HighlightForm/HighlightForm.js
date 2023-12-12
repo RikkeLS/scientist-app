@@ -1,6 +1,7 @@
 import { useState } from "react";
 import useSWR from "swr";
 import { useRouter } from "next/router";
+import StyledButton from "../StyledButton/StyledButton";
 
 export default function HighlightForm({getHighlightContent}) {
     const [isSelectPaperRef,setisSelectPaperRef] = useState(false)
@@ -65,7 +66,7 @@ export default function HighlightForm({getHighlightContent}) {
             <input id='refTextHighlight' name='refText'
             defaultValue='Herenz et al. 2017, Fig. 11'
             />
-            <button type="submit">Submit</button>
+            <StyledButton type="submit">Submit</StyledButton>
         </form>
         </>
 

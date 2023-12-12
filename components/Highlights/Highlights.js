@@ -147,7 +147,7 @@ export default function Highlights() {
 
     return (
         <>
-        <h2>Scientific results</h2>
+        <h2 className="highligtsMainTitle">Scientific results</h2>
         {session?.user.name===currentPageOwner && 
         <>
             <StyledButton onClick={()=>setIsAddHighlight( !isAddHighlight )} >{!isAddHighlight ? 'Add entry': 'Hide entry form'}</StyledButton>

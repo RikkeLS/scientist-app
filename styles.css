@@ -134,6 +134,10 @@ li {
     border-top:2px solid var(--color-hgamma);
     border-right:2px solid var(--color-hdelta);    
 }
+.profileImageOnProfilePage {
+    margin: 20px;
+    margin-left: 50px;
+}
 
 /* create profile */
 .createProfileContainer {
@@ -148,4 +152,13 @@ input[type=checkbox] {
   -webkit-transform: scale(2); /* Safari and Chrome */
   transform: scale(2);
   padding: 10px;
+}
+
+
+/*==== for Highligts:==== */
+
+/* in Highlights */
+.highligtsMainTitle {
+    margin: 30px;
+    margin-left: 30px;
 }
