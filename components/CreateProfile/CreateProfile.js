@@ -15,7 +15,7 @@ export default function CreateProfile () {
         return (
             <>
             <h2>Login to create a profile</h2>
-            <LoginButton/>
+            {/* <LoginButton/> */}
             </>)
     }
     

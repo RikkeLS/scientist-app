@@ -12,6 +12,7 @@
 @import './components/PapersField/PapersField.css';
 @import './components/ProfileContentForm/ProfileContentForm.css';
 @import './components/SortingSetting/SortingSetting.css';
+@import './components/Footer/Footer.css';
 
 
 :root {
