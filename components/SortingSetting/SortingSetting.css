@@ -1,0 +1,19 @@
+.sortingSettingSection {
+    margin-left: 30px;
+}
+
+.sortByList {
+    width: 200px;
+}
+.sortByListItem1,.sortByListItem2,.sortByListItem3 {
+    border-bottom: 2px solid white;
+}
+.sortByListItem1:hover {
+    border-bottom: 2px solid var(--color-hbeta);
+}
+.sortByListItem2:hover {
+    border-bottom: 2px solid var(--color-hgamma);
+}
+.sortByListItem3:hover {
+    border-bottom: 2px solid var(--color-halpha);
+}

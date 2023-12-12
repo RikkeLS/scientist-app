@@ -11,6 +11,7 @@
 @import './components/FilterSetting/FilterSetting.css';
 @import './components/PapersField/PapersField.css';
 @import './components/ProfileContentForm/ProfileContentForm.css';
+@import './components/SortingSetting/SortingSetting.css';
 
 
 :root {
