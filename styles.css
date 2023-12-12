@@ -98,10 +98,16 @@ li {
 .homePage-title {
     width: 300px;
     text-align: center;
+    font-size: xx-large;
     border-bottom:1px solid var(--color-halpha);
 }
+.createProfileLinkContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
 .createProfile-title {
-    text-align: center;
+    /* text-align: center; */
     width: 300px;
     border-bottom:1px solid var(--color-hbeta);
 }
