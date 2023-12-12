@@ -19,7 +19,7 @@ const StyledButtonType = styled.button`
     border-radius: 3px;
     margin: 10px;
     margin-left:20px;
-    max-height: 30px;
+    max-height: 50px;
     max-width: 130px;
     align-self: center;
     font-size: small;

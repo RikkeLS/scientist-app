@@ -5,6 +5,7 @@ import useSWR from 'swr';
 import { useState } from "react";
 import PaperSearchQuery from "../PaperSearchQuery/PaperSearchQuery";
 import SelectPapers from "../SelectPapers/SelectPapers"
+import StyledButton from "../StyledButton/StyledButton";
 
 export default function PapersCollection () {
     const router = useRouter()
@@ -91,9 +92,9 @@ export default function PapersCollection () {
             <SelectPapers authorToFetch={authorToFetch} handleNewSearch={handleNewSearch} 
              addSelectedPapers={addSelectedPapers} isPaperSaved={isPaperSaved} isAddPapers={isAddPapers}/>
             }
-            <h2 className="papersTitle" >Papers on arXiv:</h2>
+            <h2 className="papersList-title" >Papers on arXiv:</h2>
             {session?.user.name===currentPageOwner && 
-            <button onClick={()=>setIsAddPapers(true)} >{addButtonText}</button>
+            <StyledButton onClick={()=>setIsAddPapers(true)} > {addButtonText} </StyledButton>
             }
             {isAddPapers && <PaperSearchQuery onSearch={handleSearchByAuthorSubmit}/>}
             <ul className='paperOverviewList'>

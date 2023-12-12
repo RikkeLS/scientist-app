@@ -2,7 +2,9 @@
 import { useEffect, useState } from 'react';
 import Paper from '../Paper/Paper';
 import SaveButton from '../SaveButton/SaveButton';
+import SavePaperButton from '../SavePaperButton/SavePaperButton';
 import SelectAllButton from '../SelectAllButton/SelectAllButton';
+import StyledButton from '../StyledButton/StyledButton';
 
 console.clear();
 export default function PapersList ({authorToFetch,handleNewSearch,addSelectedPapers,isPaperSaved}) {
@@ -78,23 +80,24 @@ export default function PapersList ({authorToFetch,handleNewSearch,addSelectedPa
 
     return (
         <> 
-        <h3>Papers on arXiv from search <em>author: {authorName}</em> </h3>
+        <h3 className='papersList-title'>Papers on arXiv from search <em>author: {authorName}</em> </h3>
         <ul className='papersSelectionButtonList'>
         <li>
-        <button className='NewSearchButton' onClick={()=> handleNewSearch()}>New search</button>
+        {/* <button className='NewSearchButton' onClick={()=> handleNewSearch()}>New search</button> */}
+        <StyledButton onClick={()=> handleNewSearch()}>New search</StyledButton>
         </li><li>
         <SelectAllButton action='select' onClick={()=>handleSelectAllPapers()}>Select all papers</SelectAllButton>
         </li><li>
         <SelectAllButton action='deselect' onClick={()=>handleDeSelectAllPapers()}>Deselect all papers</SelectAllButton>
         </li><li>
-        {numberOfSelectedPapers===0 ? <p>Select papers to save to the profile</p> : 
-        <SaveButton onSave={()=>addSelectedPapers(papers,isSelectedInfo)} isSaved={isPaperSaved} itemSaved={numberOfSelectedPapers===1 ?  'paper':`${numberOfSelectedPapers} papers`}/>
+        {numberOfSelectedPapers===0 ? <p className='selectPapersInfoText'>Select papers to save to the profile</p> : 
+        <SavePaperButton onSave={()=>addSelectedPapers(papers,isSelectedInfo)} isSaved={isPaperSaved} itemSaved={numberOfSelectedPapers===1 ?  'paper':`${numberOfSelectedPapers} papers`}/>
         }
         </li>
         </ul>
                 <ul className='papersList'>
                 {papers?.map( paper =>
-                    <Paper key={paper.id} paper={paper} handleSelectPaperToggle={handleSelectPaperToggle} isSelectedInfo={isSelectedInfo} />
+                    <Paper key={paper._id} paper={paper} handleSelectPaperToggle={handleSelectPaperToggle} isSelectedInfo={isSelectedInfo} />
                 )}
                     
                 </ul>

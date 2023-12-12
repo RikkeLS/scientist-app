@@ -1,3 +1,7 @@
 .SelectButtonImage {
     border: 2px solid gray;
+
+}
+.SelectButtonImage:hover {
+    border: 2px solid var(--color-hbeta);
 }

@@ -9,23 +9,24 @@ const StyledPaperBorder = styled.li`
     display: flex;
     flex-direction: column;
     width: ${({$width}) =>($width)};
-    min-height: ${({$width}) =>($width*1.4)} ;
+    /* min-height:  ${({$width}) =>($width*1.4)} ; */
+    min-height: 450px;
     /* height: ${({$width}) =>($width*2)}; */
     border: 1px solid rgba(88, 88, 88, 0.926);
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     padding-top: 20px;
     padding:20px 20px 10px;
-    resize: horizontal;
-    overflow: auto;
+    /* resize: horizontal;
+    overflow: auto; */
     &:hover {
         border: 1px solid var(--color-${({$borderColor}) =>($borderColor)} );
     }
 `
 export default function StyledPaperListItem({children,forSelection}) {
     let $width = '350px';
-    if (forSelection){
-        $width = '180px'
-    }
+    // if (forSelection){
+    //     $width = '180px'
+    // }
     return (
         <StyledPaperBorder $width={$width} $borderColor={randomColor()}>{children}</StyledPaperBorder>
     )

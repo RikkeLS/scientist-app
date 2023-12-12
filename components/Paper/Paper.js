@@ -48,7 +48,7 @@ export default function Paper({paper,isSelectedInfo, isAddPapers, handleSelectPa
             <Link className="paper_link" href={link.href}>{link.title ? link.title : link.type}</Link>
             </li>))}
         </ul>
-         {highlightIDs.length > 0 && 
+         {/* {highlightIDs.length > 0 && 
          <>
          <h4 className="paper_highlightTitle">See details</h4> 
          <ul className="paper_highlightList" >{
@@ -57,18 +57,11 @@ export default function Paper({paper,isSelectedInfo, isAddPapers, handleSelectPa
             </li>)}
             </ul>
          </>
-         }
+         } */}
 
         <p className="paper_published">Published: {paper.published}</p>
         <p className="paper_updated">Updated: {paper.updated}</p>
-        {/* <ul className="paper_categories">
-            <li>
-            {paper.categories[0].scheme}
-            </li>
-            <li>
-            {paper.categories[0].term}
-            </li>
-        </ul> */}
+
     </StyledPaperListItem>)
                 
 }
