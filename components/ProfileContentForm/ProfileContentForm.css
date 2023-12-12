@@ -1,0 +1,38 @@
+.profileContentFormContainer {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    background-color: aquamarine;
+    height: 230px;
+    margin-left: 60px;
+    padding: 10px;
+    gap:5px;
+}
+
+select {
+    font-size: medium;
+    max-width: 200px;
+}
+textarea {
+    font-size: medium;
+}
+input {
+    font-size: medium;
+}
+label {
+    margin-right: 5px;
+}
+
+.profileContentForm_textareaAndButton {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 10px;
+}
+.profileContentForm-textarea {
+    height: 60px;
+}
+
+.profileContentForm-button {
+    width: 60px;
+}

@@ -18,9 +18,11 @@ const StyledButtonType = styled.button`
     padding-right: 10px;
     border-radius: 3px;
     margin: 10px;
+    margin-left:20px;
     max-height: 30px;
-    max-width: 120px;
+    max-width: 130px;
     align-self: center;
+    font-size: small;
 
     &:hover {
         border: 1px solid var(--color-${({$borderColor}) =>($borderColor)} );

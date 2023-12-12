@@ -1,4 +1,5 @@
 import { useState } from "react";
+import StyledButton from "../StyledButton/StyledButton";
 
 export default function ProfileContentForm ({papers,getProfileContent}) {
     const [selectedTemplate,setTemplate] = useState()
@@ -41,7 +42,7 @@ export default function ProfileContentForm ({papers,getProfileContent}) {
     
     return (
         <>
-            
+        <section className="profileContentFormContainer">
         <label htmlFor="template">Select a template:</label>
         <select defaultValue='basic' onInput={handleTemplate} name="template" id="template" form='ProfileContentForm'>
             <option value='collaborators'>Collaborators</option>
@@ -53,17 +54,23 @@ export default function ProfileContentForm ({papers,getProfileContent}) {
         {selectedTemplate ? <input defaultValue={selectedTemplate.toUpperCase()} type='text' name="title" id="title"></input> :
         <input defaultValue='' type='text' name="title" id="title"></input> }
         
+        <section className="profileContentForm_textareaAndButton">
         {selectedTemplate==='collaborators' ? <>
-        <label htmlFor="mainText">Top 5 co-authors:</label>
-        <textarea defaultValue={topCoAuthors.slice(0,5)} name="mainText" id="mainText"></textarea>
+        
+            
+        <label htmlFor="mainText">Top 10 co-authors:</label>
+        <textarea className="profileContentForm-textarea" defaultValue={topCoAuthors.slice(0,10)} name="mainText" id="mainText"></textarea>
         </>
         : <>
         <label htmlFor="mainText">Text content:</label>
-        <textarea defaultValue='' name="mainText" id="mainText"></textarea>
+        <textarea className="profileContentForm-textarea" defaultValue='' name="mainText" id="mainText"></textarea>
         </>
         }
-        <button type='submit'>Submit</button>
+        {/* <button className="profileContentForm-button" type='submit'>Display</button> */}
+        <StyledButton type='submit'> Display</StyledButton>
+        </section>
         </form>
+        </section>
         </>
     )
 }
