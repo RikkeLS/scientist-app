@@ -3,6 +3,7 @@ import Link from "next/link";
 import UserNavBar from "../../components/UserNavBar/UserNavBar";
 
 import MainProfile from "../../components/MainProfile/MainProfile";
+import Footer from "../../components/Footer/Footer";
 
 export default function MainProfilePage() {
  return (
@@ -10,10 +11,8 @@ export default function MainProfilePage() {
             <UserNavBar/>
 
             <MainProfile/>
+            <Footer/>
 
-
-            <LoginButton/>
-            <Link href={'/'}>Go to homepage</Link>
         </>
     )
     

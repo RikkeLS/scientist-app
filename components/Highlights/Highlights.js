@@ -157,7 +157,9 @@ export default function Highlights() {
         }
             { content &&
             <>
+            <div className="saveHighlightButtonContainer">
             <SaveButton isSaved={isContentSaved} onSave={handleAddHighlight} itemSaved={'highlight'}/> 
+            </div>
             <ShowHighlight content={content}/>
             </>} 
             {highlights ? 
