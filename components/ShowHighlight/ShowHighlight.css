@@ -1,3 +1,10 @@
+
+/* in HighlightsList */
+.highlightsList {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
 .highlightContainer {
     display: flex;
     /* flex-direction: column; */
@@ -43,9 +50,11 @@
     text-size-adjust: none;
     max-height: var(--height-highlight);
     max-width: 500px;
+    margin-left: 15px;
 
 }
 .highlight_image {
+    margin-left: 25px;
     height: var(--height-highlight);
 }
 
