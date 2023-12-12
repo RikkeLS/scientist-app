@@ -9,6 +9,7 @@
 @import './components/CreateProfileForm/CreateProfileForm.css';
 @import './components/FilterSetting/FilterSetting.css';
 @import './components/PapersField/PapersField.css';
+@import './components/ProfileContentForm/ProfileContentForm.css';
 
 
 :root {
@@ -16,13 +17,13 @@
     --color-std-background: white;
     --color-buttons:rgb(242, 242, 242);
     --color-halpha:rgb(255, 0, 0);
-    --color-halpha-tp:rgba(255, 0, 0, 0.2);
+    --color-halpha-tp:rgba(255, 0, 0, 0.1);
     --color-hbeta:rgb(0, 239, 255);
-    --color-hbeta-tp:rgb(0, 239, 255, 0.2);
+    --color-hbeta-tp:rgb(0, 239, 255, 0.1);
     --color-hgamma:rgb(40, 0, 255);
-    --color-hgamma-tp:rgb(40, 0, 255,0.2);
+    --color-hgamma-tp:rgb(40, 0, 255,0.1);
     --color-hdelta:rgb(126, 0, 219);
-    --color-hdelta-tp:rgb(126, 0, 219,0.2);
+    --color-hdelta-tp:rgb(126, 0, 219,0.1);
     --width-window: 1200px;
     --width-favIcon:200px;
     --height-highlight: 330px;
@@ -51,6 +52,8 @@ body {
     border: 1px solid black;
     border-radius: 10px;
     padding-right: 40px ;
+
+    min-height: 100vh;
 }
 
 /* button {
@@ -82,6 +85,7 @@ li {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 100px;
     gap:10px;
 }
 .mainNavbar {

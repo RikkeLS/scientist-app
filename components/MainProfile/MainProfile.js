@@ -7,6 +7,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import Image from "next/image"
 import useSWR from "swr"
+import StyledButton from "../StyledButton/StyledButton";
 
 export default function MainProfile() {
     const {data:session} = useSession();
@@ -14,6 +15,7 @@ export default function MainProfile() {
     const currentPageOwner = router.query.userName;
     const [entry, setEntry] = useState();
     const [isContentSaved,setIsContentSaved] = useState(false);
+    const [isAddEntry,setIsAddEntry] = useState(false);
     const { data:papers, isLoading:isLoadingPapers, error:errorPapers } = useSWR(`/api/${currentPageOwner}/papers`)
     const {data:userInfo,isLoading:isLoadingUserInfo,error:errorUserInfo} = useSWR(`/api/${currentPageOwner}/userInfo`)
     const {data:entries,isLoading:isLoadingEntries,error:errorEntries,mutate:mutateEntries} = useSWR(`/api/${currentPageOwner}/profileEntries`)
@@ -82,8 +84,9 @@ export default function MainProfile() {
         <> {
             session?.user.name===currentPageOwner ? <h1> Your main profile page </h1> : <h1>Main profile page for {currentPageOwner}</h1> 
         }
-        
         {session?.user.name===currentPageOwner &&
+        <StyledButton onClick={()=>setIsAddEntry( !isAddEntry )} >{!isAddEntry ? 'Add entry': 'Hide entry form'}</StyledButton>}
+        {isAddEntry===true && 
         <ProfileContentForm getProfileContent={getProfileContent} papers={papers}/> }
         {entry && 
         <ShowEntryData entry={entry}
