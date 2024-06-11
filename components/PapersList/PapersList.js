@@ -13,6 +13,12 @@ export default function PapersList ({authorToFetch,handleNewSearch,addSelectedPa
     const prefix = 'au'// for author: https://info.arxiv.org/help/api/user-manual.html#51-details-of-query-construction
     const arxiv = require('arxiv-api');
     const authorName = authorToFetch.author// 'saust'
+    const axios = require('axios');
+    const _ = require('lodash');
+    // const util = require('util');
+    // const {parseString} = require('xml2js');
+    // const parseStringPromisified = util.promisify(parseString);
+    
     
     const [papers, setPapers] = useState(null)
     const [loading, setLoading] = useState(true);
@@ -44,20 +50,44 @@ export default function PapersList ({authorToFetch,handleNewSearch,addSelectedPa
     }
 
     useEffect(()=> {
+    // async function fetchData() {
+    //     try {
+    //         const response = await arxiv.search({
+    //             searchQueryParams: [
+    //                 {
+    //                     include: [{name: authorName,prefix:prefix}]
+    //                 },
+    //             ],
+    //             start: 0,
+    //             maxResults: 10,
+    //                 });
+    //         setPapers(response)
+    //         setLoading(false)
+    //     } catch (error) {
+    //         setError(error)
+    //         console.log('error fetching',error);
+    //         setLoading(false)
+    //     }
     async function fetchData() {
         try {
-            const response = await arxiv.search({
-                searchQueryParams: [
-                    {
-                        include: [{name: authorName,prefix:prefix}]
-                    },
-                ],
-                start: 0,
-                maxResults: 10,
-                    });
-            setPapers(response)
-            setLoading(false)
-        } catch (error) {
+            const arxiv_url = 'http://export.arxiv.org/api/query?search_query=all:electron&start=0&max_results=10'
+        // const searchQuery = searchQueryParams.map(parseTags).join(SEPARATORS.OR);
+            const response = await axios.get(arxiv_url,
+                {
+                  headers : {
+        'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
+    }
+                 },
+            );
+             
+             console.log('response',response)
+             setPapers(response.data)
+            //  const parsedData = await parseStringPromisified(response.data);
+            //  console.log('parsedData',parsedData)
+            //  setPapers(parsedData)
+        // return _.get(parsedData, 'feed.entry', []).map(parseArxivObject)
+             setLoading(false);
+                } catch (error) {
             setError(error)
             console.log('error fetching',error);
             setLoading(false)
@@ -75,7 +105,11 @@ export default function PapersList ({authorToFetch,handleNewSearch,addSelectedPa
     }
 
     if (!papers) return (<h1>data not available</h1>)
-
+    if (papers) {
+        console.log('data',papers)
+        return (<h1>console for data</h1>)
+    }
+        
     const numberOfSelectedPapers = isSelectedInfo?.filter(info => info.isSelected).length
 
     return (
